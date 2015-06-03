@@ -7,8 +7,8 @@
 
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="/tags/helloworld/">
-  <link href="/tags/helloworld/index.xml" rel="alternate" type="application/rss+xml" title="importre" />
+  <link rel="canonical" href="http://localhost:1313/tags/helloworld/">
+  <link href="http://localhost:1313/tags/helloworld/index.xml" rel="alternate" type="application/rss+xml" title="importre" />
 
   <title>importre</title>
   <script src="/js/jquery.min.js"></script>
@@ -53,7 +53,7 @@
 
 
 <div class="page-header">
-  <h1>Archives</h1>
+  <h1>Helloworld</h1>
 </div>
 
 
@@ -62,7 +62,7 @@
   
   <li>
     <h4>
-      <a href="/post/helloworld/">Hello World!</a>
+      <a href="http://localhost:1313/post/helloworld/">Hello World!</a>
       <small>
         <span>/ June 3</span>
       </small>
@@ -86,6 +86,9 @@
 </footer>
 
 
-</body>
+<script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 
