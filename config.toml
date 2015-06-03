@@ -1,10 +1,9 @@
 theme = "heobot"
-baseurl = "/"
+baseurl = "http://importre.github.io/"
 languageCode = "ko-kr"
 title = "importre"
 MetaDataFormat = "toml"
 paginate = 3
-baseurl: "http://importre.github.io/"
 
 [params]  
   author = "Jaewe Heo"
