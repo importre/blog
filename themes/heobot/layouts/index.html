@@ -1,0 +1,31 @@
+{{ partial "header.html" . }}
+{{ $paginator := .Paginate (where .Data.Pages "Type" "post") }}
+
+<div class="row">
+  <div class="col-md-9">
+    {{ range $paginator.Pages }}
+    <section>
+      <article>
+        <header>
+          <div class="page-header">
+            <h1>
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+              <small>{{ .Date.Format "January 2, 2006" }}</small>
+            </h1>
+          </div>
+        </header>
+        <main>
+          {{ partial "contents.html" . }}
+        </main>
+      </article>
+    </section>
+    {{ end }}
+    {{ template "_internal/pagination.html" . }}
+  </div>
+
+  <div class="col-md-3">
+    {{ partial "sidebar.html" . }}
+  </div>
+</div>
+
+{{ partial "footer.html" . }}

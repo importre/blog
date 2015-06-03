@@ -1,0 +1,17 @@
+name = "heobot"
+license = "MIT"
+#licenselink = "https://github.com/.../.../LICENSE.md"
+description = ""
+#homepage = "http://siteforthistheme.com/"
+tags = ["tags", "categories"]
+features = ["", ""]
+
+[author]
+  name = "Jaewe Heo"
+  homepage = ""
+
+# If porting an existing theme
+[original]
+  name = ""
+  homepage = ""
+  repo = ""

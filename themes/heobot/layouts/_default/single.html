@@ -1,0 +1,31 @@
+{{ partial "header.html" . }}
+
+<div class="page-header">
+  <h1>
+    {{ .Title }}
+    <small>{{ .Date.Format "January 2, 2006" }}</small>
+  </h1>
+</div>
+
+{{ partial "contents.html" . }}
+<hr/>
+
+{{ range .Params.categories }}
+<div>
+  <span class="label label-success">
+    <a href="/categories/{{ . | urlize }}" style="color: white;">{{ . }}</a>
+  </span>
+  &nbsp;
+</div>
+{{ end }}
+
+{{ range .Params.tags }}
+<div>
+  <span class="label label-primary">
+    <a href="/tags/{{ . | urlize }}" style="color: white;">{{ . }}</a>
+  </span>
+  &nbsp;
+</dd>
+{{ end }}
+
+{{ partial "footer.html" . }}
