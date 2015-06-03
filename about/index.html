@@ -7,7 +7,7 @@
 
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="http://importre.github.io/about/">
+  <link rel="canonical" href="http://localhost:1313/about/">
   <link href="" rel="alternate" type="application/rss+xml" title="importre" />
 
   <title>About</title>
@@ -21,22 +21,22 @@
   <link rel="stylesheet" href="/css/heobot.css">
 
   <meta property="og:title"             content="About"/>
+  <meta property="twitter:title"        content="About">
+
   <meta property="og:site_name"         content="importre"/>
-  <meta property="og:url"               content="http://importre.github.io/about/"/>
+  <meta property="twitter:site"         content="importre">
+
+  <meta property="og:url"               content="http://localhost:1313/about/"/>
+
   
   <meta property="og:image"             content="/images/brand.png"/>
-  
-  
-  <meta property="og:description"       content=""/>
-  
-
-  <meta property="twitter:title"        content="About">
-  <meta property="twitter:site"         content="importre">
-  
   <meta property="twitter:image"        content="/images/brand.png">
   
+
   <meta property="twitter:creator"      content="Jaewe Heo">
+
   
+  <meta property="og:description"       content=""/>
   <meta property="twitter:description"  content="">
   
 
@@ -102,6 +102,9 @@
 </footer>
 
 
-</body>
+<script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 

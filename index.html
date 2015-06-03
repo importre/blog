@@ -7,8 +7,8 @@
 
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="http://importre.github.io/">
-  <link href="http://importre.github.io/index.xml" rel="alternate" type="application/rss+xml" title="importre" />
+  <link rel="canonical" href="http://localhost:1313/">
+  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="importre" />
 
   <title>importre</title>
   <script src="/js/jquery.min.js"></script>
@@ -21,19 +21,20 @@
   <link rel="stylesheet" href="/css/heobot.css">
 
   <meta property="og:title"             content="importre"/>
+  <meta property="twitter:title"        content="importre">
+
   <meta property="og:site_name"         content="importre"/>
-  <meta property="og:url"               content="http://importre.github.io/"/>
+  <meta property="twitter:site"         content="importre">
+
+  <meta property="og:url"               content="http://localhost:1313/"/>
+
   
   <meta property="og:image"             content="/images/brand.png"/>
-  
-  
-
-  <meta property="twitter:title"        content="importre">
-  <meta property="twitter:site"         content="importre">
-  
   <meta property="twitter:image"        content="/images/brand.png">
   
+
   <meta property="twitter:creator"      content="Jaewe Heo">
+
   
 
 </head>
@@ -78,7 +79,7 @@
         <header>
           <div class="page-header">
             <h1>
-              <a href="http://importre.github.io/post/helloworld/">Hello World!</a>
+              <a href="http://localhost:1313/post/helloworld/">Hello World!</a>
               <small>June 3, 2015</small>
             </h1>
           </div>
@@ -194,6 +195,9 @@ func main() {
 </footer>
 
 
-</body>
+<script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 

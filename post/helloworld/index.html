@@ -7,7 +7,7 @@
 
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="http://importre.github.io/post/helloworld/">
+  <link rel="canonical" href="http://localhost:1313/post/helloworld/">
   <link href="" rel="alternate" type="application/rss+xml" title="importre" />
 
   <title>Hello World!</title>
@@ -21,22 +21,22 @@
   <link rel="stylesheet" href="/css/heobot.css">
 
   <meta property="og:title"             content="Hello World!"/>
+  <meta property="twitter:title"        content="Hello World!">
+
   <meta property="og:site_name"         content="importre"/>
-  <meta property="og:url"               content="http://importre.github.io/post/helloworld/"/>
+  <meta property="twitter:site"         content="importre">
+
+  <meta property="og:url"               content="http://localhost:1313/post/helloworld/"/>
+
   
   <meta property="og:image"             content="/images/brand.png"/>
-  
-  
-  <meta property="og:description"       content="글이 없으면 실행이 안돼서 Hello World! package main import &quot;fmt&quot; func main() { fmt.Println(&quot;Hello World!&quot;) }"/>
-  
-
-  <meta property="twitter:title"        content="Hello World!">
-  <meta property="twitter:site"         content="importre">
-  
   <meta property="twitter:image"        content="/images/brand.png">
   
+
   <meta property="twitter:creator"      content="Jaewe Heo">
+
   
+  <meta property="og:description"       content="글이 없으면 실행이 안돼서 Hello World! package main import &quot;fmt&quot; func main() { fmt.Println(&quot;Hello World!&quot;) }"/>
   <meta property="twitter:description"  content="글이 없으면 실행이 안돼서 Hello World! package main import &quot;fmt&quot; func main() { fmt.Println(&quot;Hello World!&quot;) }">
   
 
@@ -131,6 +131,9 @@ func main() {
 </footer>
 
 
-</body>
+<script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 
