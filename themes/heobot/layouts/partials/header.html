@@ -21,26 +21,25 @@
   <link rel="stylesheet" href="/css/heobot.css">
 
   <meta property="og:title"             content="{{ .Title }}"/>
+  <meta property="twitter:title"        content="{{ .Title }}">
+
   <meta property="og:site_name"         content="{{ .Site.Title }}"/>
+  <meta property="twitter:site"         content="{{ .Site.Title }}">
+
   <meta property="og:url"               content="{{ .Permalink }}"/>
+
   {{ if .Site.Params.profile }}
   <meta property="og:image"             content="{{ .Site.Params.profile }}"/>
-  {{ else }}
-  <meta property="og:image"             content="/images/brand.png"/>
-  {{ end }}
-  {{ if .IsPage }}
-  <meta property="og:description"       content="{{ .Summary }}"/>
-  {{ end }}
-
-  <meta property="twitter:title"        content="{{ .Title }}">
-  <meta property="twitter:site"         content="{{ .Site.Title }}">
-  {{ if .Site.Params.profile }}
   <meta property="twitter:image"        content="{{ .Site.Params.profile }}">
   {{ else }}
+  <meta property="og:image"             content="/images/brand.png"/>
   <meta property="twitter:image"        content="/images/brand.png">
   {{ end }}
+
   <meta property="twitter:creator"      content="{{ .Site.Params.author }}">
+
   {{ if .IsPage }}
+  <meta property="og:description"       content="{{ .Summary }}"/>
   <meta property="twitter:description"  content="{{ .Summary }}">
   {{ end }}
 
