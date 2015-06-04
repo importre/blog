@@ -7,10 +7,10 @@
 
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="http://localhost:1313/">
-  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="importre" />
+  <link rel="canonical" href="http://localhost:1313/post/identiyEquals/">
+  <link href="" rel="alternate" type="application/rss+xml" title="importre" />
 
-  <title>importre</title>
+  <title>Weird identiyEquals</title>
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/highlight.pack.js"></script>
@@ -20,13 +20,13 @@
   <link rel="stylesheet" href="/css/github.css">
   <link rel="stylesheet" href="/css/heobot.css">
 
-  <meta property="og:title"             content="importre"/>
-  <meta property="twitter:title"        content="importre">
+  <meta property="og:title"             content="Weird identiyEquals"/>
+  <meta property="twitter:title"        content="Weird identiyEquals">
 
   <meta property="og:site_name"         content="importre"/>
   <meta property="twitter:site"         content="importre">
 
-  <meta property="og:url"               content="http://localhost:1313/"/>
+  <meta property="og:url"               content="http://localhost:1313/post/identiyEquals/"/>
 
   
   <meta property="og:image"             content="/images/brand.png"/>
@@ -35,6 +35,9 @@
 
   <meta property="twitter:creator"      content="Jaewe Heo">
 
+  
+  <meta property="og:description"       content="괴상한 identiyEquals Kotlin Korea에 올라온 글을 보고 나 역시 궁금해졌다. Kotlin 문서에 따르면 val a: Int = 10000 print(a identityEquals a) 결과는 true가 나온다고 한다. 같은 곳을 바라볼테니true인게 당연하다고 생각했다. 하지만 실제로 false가 출력된다고 한다. 직접 실행해 보았는데, val a: Int = 1 // 귀찮아서 1로... print(a identityEquals a) 결과는 true. 엇, 이거 뭐지? 근데 10000을 넣으면 진짜 false가 출력된다. class identiyEquals Github에서 identityEquals 코드를 살펴보았다. 소스를 보면 OBJECT_TYPE으로 비교를 하고, 코드 생성 시 Integer.valueOf()를 통해 Boxing하는 것으로 보인다."/>
+  <meta property="twitter:description"  content="괴상한 identiyEquals Kotlin Korea에 올라온 글을 보고 나 역시 궁금해졌다. Kotlin 문서에 따르면 val a: Int = 10000 print(a identityEquals a) 결과는 true가 나온다고 한다. 같은 곳을 바라볼테니true인게 당연하다고 생각했다. 하지만 실제로 false가 출력된다고 한다. 직접 실행해 보았는데, val a: Int = 1 // 귀찮아서 1로... print(a identityEquals a) 결과는 true. 엇, 이거 뭐지? 근데 10000을 넣으면 진짜 false가 출력된다. class identiyEquals Github에서 identityEquals 코드를 살펴보았다. 소스를 보면 OBJECT_TYPE으로 비교를 하고, 코드 생성 시 Integer.valueOf()를 통해 Boxing하는 것으로 보인다.">
   
 
 </head>
@@ -70,21 +73,13 @@
   <div class="container">
 
 
+<div class="page-header">
+  <h1>
+    Weird identiyEquals
+  </h1>
+</div>
 
-<div class="row">
-  <div class="col-md-9">
-    
-    <section>
-      <article>
-        <header>
-          <div class="page-header">
-            <h1>
-              <a href="http://localhost:1313/post/identiyEquals/">Weird identiyEquals</a>
-            </h1>
-          </div>
-        </header>
-        <main>
-          <div>
+<div>
 
   <div>
     <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
@@ -168,129 +163,37 @@ print(a identityEquals a)
 
 </div>
 
-        </main>
-        <br/>
-      </article>
-    </section>
-    
-    <section>
-      <article>
-        <header>
-          <div class="page-header">
-            <h1>
-              <a href="http://localhost:1313/post/helloworld/">Hello World!</a>
-            </h1>
-          </div>
-        </header>
-        <main>
-          <div>
 
-  <div>
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-    June 3, 2015
-    &nbsp;
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-    Jaewe Heo
-  </div>
+<hr/>
 
-  <p>글이 없으면 실행이 안돼서 <code>Hello World!</code></p>
-
-<pre><code class="language-go">package main
-
-import &quot;fmt&quot;
-
-func main() {
-  fmt.Println(&quot;Hello World!&quot;)
-}
-</code></pre>
-
+<div>
+  <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+  &nbsp;
+  
+  <span class="label label-success">
+    <a href="/categories/kotlin" style="color: white;">kotlin</a>
+  </span>
+  &nbsp;
+  
 </div>
 
-        </main>
-        <br/>
-      </article>
-    </section>
-    
-    
-    
-  </div>
-
-  <div class="col-md-3">
-    <section class="side">
-
-  <div class="row">
-    <div class="col-xs-12 col-sm-3 col-md-12">
-      
-      
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Categories</h3>
-        </div>
-        <ul class="list-group">
-          
-          <a href="/categories/kotlin" class="list-group-item">kotlin</a>
-          
-          <a href="/categories/test" class="list-group-item">test</a>
-          
-        </ul>
-      </div>
-      
-    </div>
-
-    <div class="col-xs-12 col-sm-3 col-md-12">
-      
-      
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Tags</h3>
-        </div>
-        <ul class="list-group">
-          
-          <a href="/tags/helloworld" class="list-group-item">helloworld</a>
-          
-          <a href="/tags/identiyequals" class="list-group-item">identiyequals</a>
-          
-          <a href="/tags/integer" class="list-group-item">integer</a>
-          
-        </ul>
-      </div>
-      
-    </div>
-
-    <div class="col-xs-12 col-sm-3 col-md-12">
-      <div class="thumbnail">
-        
-        <img src="/images/brand.png">
-        
-
-        <div class="caption">
-          <h4>Jaewe Heo</h4>
-          <p></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-3 col-md-12">
-      <ul class="list-group">
-        
-        <a href="https://github.com/importre" class="list-group-item">
-          github
-        </a>
-        
-
-        
-        <a href="https://twitter.com/importre" class="list-group-item">
-          twitter
-        </a>
-        
-      </ul>
-    </div>
-  </div>
-
-</section>
-
-  </div>
+<div>
+  <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/identiyequals" style="color: white;">identiyEquals</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/integer" style="color: white;">Integer</a>
+  </span>
+  &nbsp;
+  
 </div>
+
+<hr/>
 
 </div>
 

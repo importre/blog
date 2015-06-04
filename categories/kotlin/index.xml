@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on importre</title>
-    <link>http://localhost:1313/post/</link>
-    <description>Recent content in Posts on importre</description>
+    <title>Kotlin on importre</title>
+    <link>http://localhost:1313/categories/kotlin/</link>
+    <description>Recent content in Kotlin on importre</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     <lastBuildDate>Thu, 04 Jun 2015 15:08:45 +0900</lastBuildDate>
-    <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/kotlin/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Weird identiyEquals</title>
@@ -86,25 +86,6 @@ print(a identityEquals a)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Java에서 Autoboxing&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello World!</title>
-      <link>http://localhost:1313/post/helloworld/</link>
-      <pubDate>Wed, 03 Jun 2015 23:20:27 +0900</pubDate>
-      
-      <guid>http://localhost:1313/post/helloworld/</guid>
-      <description>&lt;p&gt;글이 없으면 실행이 안돼서 &lt;code&gt;Hello World!&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
-
-import &amp;quot;fmt&amp;quot;
-
-func main() {
-  fmt.Println(&amp;quot;Hello World!&amp;quot;)
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
