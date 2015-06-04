@@ -8,18 +8,7 @@
 
 {{ partial "contents.html" . }}
 
-<hr/>
-
-<div>
-  <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-  &nbsp;
-  {{ range .Params.categories }}
-  <span class="label label-success">
-    <a href="/categories/{{ . | urlize }}" style="color: white;">{{ . }}</a>
-  </span>
-  &nbsp;
-  {{ end }}
-</div>
+<br/>
 
 <div>
   <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>

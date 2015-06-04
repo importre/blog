@@ -16,9 +16,17 @@
         <main>
           {{ partial "contents.html" . }}
         </main>
-        <br/>
+        <div>
+          {{ range .Params.categories }}
+          <span class="label label-success">
+            <a href="/categories/{{ . | urlize }}" style="color: white;">{{ . }}</a>
+          </span>
+          &nbsp;
+          {{ end }}
+        </div>
       </article>
     </section>
+    <br/>
     {{ end }}
     {{ template "_internal/pagination.html" . }}
   </div>
