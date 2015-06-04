@@ -2,23 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2015-06-04T15:08:45+09:00</lastmod>
+    <loc>http://importre.github.io/</loc>
+    <lastmod>2015-06-03T23:20:27+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/identiyEquals/</loc>
-    <lastmod>2015-06-04T15:08:45+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/post/helloworld/</loc>
+    <loc>http://importre.github.io/post/helloworld/</loc>
     <lastmod>2015-06-03T23:20:27+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>http://importre.github.io/about/</loc>
     <lastmod>2015-06-03T05:14:53+09:00</lastmod>
   </url>
   

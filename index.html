@@ -7,8 +7,8 @@
 
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="http://localhost:1313/">
-  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="importre" />
+  <link rel="canonical" href="http://importre.github.io/">
+  <link href="http://importre.github.io/index.xml" rel="alternate" type="application/rss+xml" title="importre" />
 
   <title>importre</title>
   <script src="/js/jquery.min.js"></script>
@@ -26,7 +26,7 @@
   <meta property="og:site_name"         content="importre"/>
   <meta property="twitter:site"         content="importre">
 
-  <meta property="og:url"               content="http://localhost:1313/"/>
+  <meta property="og:url"               content="http://importre.github.io/"/>
 
   
   <meta property="og:image"             content="/images/brand.png"/>
@@ -79,118 +79,15 @@
         <header>
           <div class="page-header">
             <h1>
-              <a href="http://localhost:1313/post/identiyEquals/">Weird identiyEquals</a>
+              <a href="http://importre.github.io/post/helloworld/">Hello World!</a>
+              <small>June 3, 2015</small>
             </h1>
           </div>
         </header>
         <main>
           <div>
-
-  <div>
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-    June 4, 2015
-    &nbsp;
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-    Jaewe Heo
-  </div>
-
-  
-
-<h2 id="괴상한-identiyequals:7c15b1cc05420c39692226153f7a75ad">괴상한 identiyEquals</h2>
-
-<p><a href="https://www.facebook.com/groups/kotlinkr/permalink/987350341289562/">Kotlin Korea에 올라온 글</a>을 보고 나 역시 궁금해졌다.
-<a href="http://kotlinlang.org/docs/reference/basic-types.html">Kotlin 문서</a>에 따르면</p>
-
-<pre><code class="language-kotlin">val a: Int = 10000
-print(a identityEquals a)
-</code></pre>
-
-<p>결과는 <code>true</code>가 나온다고 한다.
-같은 곳을 바라볼테니<code>true</code>인게 당연하다고 생각했다.</p>
-
-<p>하지만 실제로 <code>false</code>가 출력된다고 한다.</p>
-
-<p>직접 실행해 보았는데,</p>
-
-<pre><code class="language-kotlin">val a: Int = 1 // 귀찮아서 1로...
-print(a identityEquals a)
-</code></pre>
-
-<p>결과는 <code>true</code>.</p>
-
-<p>엇, 이거 뭐지? 근데 <code>10000</code>을 넣으면 진짜 <code>false</code>가 출력된다.</p>
-
-<h3 id="class-identiyequals:7c15b1cc05420c39692226153f7a75ad">class identiyEquals</h3>
-
-<p>Github에서 <a href="https://goo.gl/XvvDuI">identityEquals 코드</a>를 살펴보았다.</p>
-
-<p><a href="https://goo.gl/5vXKHr">소스</a>를 보면 <code>OBJECT_TYPE</code>으로 비교를 하고,
-코드 생성 시 <code>Integer.valueOf()</code>를 통해 <a href="https://goo.gl/p8AKdE">Boxing</a>하는 것으로 보인다.</p>
-
-<h3 id="java-lang-integer:7c15b1cc05420c39692226153f7a75ad">java.lang.Integer</h3>
-
-<p>Java는</p>
-
-<p>아래의 코드를 실행하면</p>
-
-<pre><code class="language-java">public static void Main(String[] args) {
-    final int min = -130;
-    final int max = 126;
-    final int size = 4;
-
-    for (int i = 0; i &lt; size; i++) {
-        Integer a = min + i;
-        Integer b = min + i;
-        System.out.println(a + &quot;: &quot; + (a == b));
-    }
-
-    for (int i = 0; i &lt; size; i++) {
-        Integer a = max + i;
-        Integer b = max + i;
-        System.out.println(a + &quot;: &quot; + (a == b));
-    }
-}
-</code></pre>
-
-<p>결과는 아래와 같다.</p>
-
-<pre><code>-130: false
--129: false
--128: true
--127: true
-126: true
-127: true
-128: false
-129: false
-</code></pre>
-
-<p>Java에서 Autoboxing</p>
-
-</div>
-
-        </main>
-        <br/>
-      </article>
-    </section>
-    
-    <section>
-      <article>
-        <header>
-          <div class="page-header">
-            <h1>
-              <a href="http://localhost:1313/post/helloworld/">Hello World!</a>
-            </h1>
-          </div>
-        </header>
-        <main>
-          <div>
-
-  <div>
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-    June 3, 2015
-    &nbsp;
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-    Jaewe Heo
+  <div class="text-right">
+    <p>Jaewe Heo</p>
   </div>
 
   <p>글이 없으면 실행이 안돼서 <code>Hello World!</code></p>
@@ -207,7 +104,6 @@ func main() {
 </div>
 
         </main>
-        <br/>
       </article>
     </section>
     
@@ -228,8 +124,6 @@ func main() {
         </div>
         <ul class="list-group">
           
-          <a href="/categories/kotlin" class="list-group-item">kotlin</a>
-          
           <a href="/categories/test" class="list-group-item">test</a>
           
         </ul>
@@ -247,10 +141,6 @@ func main() {
         <ul class="list-group">
           
           <a href="/tags/helloworld" class="list-group-item">helloworld</a>
-          
-          <a href="/tags/identiyequals" class="list-group-item">identiyequals</a>
-          
-          <a href="/tags/integer" class="list-group-item">integer</a>
           
         </ul>
       </div>
@@ -305,9 +195,6 @@ func main() {
 </footer>
 
 
-<script>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-		+ ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
+</body>
 </html>
 
