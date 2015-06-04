@@ -1,6 +1,11 @@
 <div>
-  <div class="text-right">
-    <p>{{ .Site.Params.author }}</p>
+
+  <div>
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+    {{ .Date.Format "January 2, 2006" }}
+    &nbsp;
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+    {{ .Site.Params.author }}
   </div>
 
   {{ .Content }}

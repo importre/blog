@@ -10,13 +10,13 @@
           <div class="page-header">
             <h1>
               <a href="{{ .Permalink }}">{{ .Title }}</a>
-              <small>{{ .Date.Format "January 2, 2006" }}</small>
             </h1>
           </div>
         </header>
         <main>
           {{ partial "contents.html" . }}
         </main>
+        <br/>
       </article>
     </section>
     {{ end }}
