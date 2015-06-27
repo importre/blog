@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>importre</title>
-    <link>http://importre.github.io/</link>
-    <description>Recent content on importre</description>
+    <title>Mahout on importre</title>
+    <link>http://importre.github.io/tags/mahout/</link>
+    <description>Recent content in Mahout on importre</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     <lastBuildDate>Mon, 08 Jun 2015 22:37:12 +0900</lastBuildDate>
-    <atom:link href="http://importre.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://importre.github.io/tags/mahout/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Hello, Mahout!</title>
@@ -41,34 +41,6 @@
 
 &lt;h3 id=&#34;classification:34c4da6d4768d05e50db99357a299b5c&#34;&gt;Classification&lt;/h3&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Hello World!</title>
-      <link>http://importre.github.io/post/helloworld/</link>
-      <pubDate>Wed, 03 Jun 2015 23:20:27 +0900</pubDate>
-      
-      <guid>http://importre.github.io/post/helloworld/</guid>
-      <description>&lt;p&gt;글이 없으면 실행이 안돼서 &lt;code&gt;Hello World!&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
-
-import &amp;quot;fmt&amp;quot;
-
-func main() {
-  fmt.Println(&amp;quot;Hello World!&amp;quot;)
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>http://importre.github.io/about/</link>
-      <pubDate>Wed, 03 Jun 2015 05:14:53 +0900</pubDate>
-      
-      <guid>http://importre.github.io/about/</guid>
-      <description></description>
     </item>
     
   </channel>
