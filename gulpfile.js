@@ -17,7 +17,6 @@ gulp.task('deploy', ['build'], function () {
   };
 
   del.sync('.publish');
-  gulp.src('CNAME').pipe(gulp.dest('./public'));
   return gulp.src('./public/**/*').pipe(ghPages(opt));
 });
 
