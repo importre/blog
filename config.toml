@@ -1,0 +1,15 @@
+theme = "heobot"
+baseurl = "http://importre.github.io/"
+languageCode = "ko-kr"
+title = "importre"
+MetaDataFormat = "toml"
+paginate = 3
+
+[params]  
+  author = "Jaewe Heo"
+#  aboutme = "허재위"
+#  profile = "/images/importre.jpg"
+  github = "importre"
+  twitter = "importre"
+  cyear = "2015"
+#  ga = "UA-44364795-2"

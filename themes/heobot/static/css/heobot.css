@@ -1,0 +1,29 @@
+/*@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);*/
+/*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
+/*@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);*/
+
+body { 
+  padding-top: 50px; 
+  /*font-family: 'Jeju Gothic', sans-serif;*/
+  /*font-family: 'Nanum Gothic', sans-serif;*/
+  /*font-family: 'Hanna', sans-serif;*/
+}
+
+pre code {
+  overflow-x: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+.hljs {
+  background: transparent;
+}
+
+.footer {
+  text-align: center;
+  padding: 50px; 
+}
+
+.side {
+  padding-top: 50px; 
+}
