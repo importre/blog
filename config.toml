@@ -5,10 +5,10 @@ title = "importre"
 MetaDataFormat = "toml"
 paginate = 3
 
-[params]  
+[params]
   author = "Jaewe Heo"
 #  aboutme = "허재위"
-#  profile = "/images/importre.jpg"
+  profile = "/images/importre.jpg"
   github = "importre"
   twitter = "importre"
   cyear = "2015"

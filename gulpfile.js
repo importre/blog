@@ -12,12 +12,8 @@ gulp.task('build', ['clean'], shell.task([
 ]));
 
 gulp.task('deploy', ['build'], function () {
-  var opt = {
-    branch: "master"
-  };
-
   del.sync('.publish');
-  return gulp.src('./public/**/*').pipe(ghPages(opt));
+  return gulp.src('./public/**/*').pipe(ghPages());
 });
 
 gulp.task('watch', ['clean'], shell.task([
