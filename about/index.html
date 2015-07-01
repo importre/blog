@@ -7,10 +7,10 @@
 
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="{{ .Permalink }}">
-  <link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+  <link rel="canonical" href="http://blog.import.re/about/">
+  <link href="" rel="alternate" type="application/rss+xml" title="importre" />
 
-  <title>{{ .Title }}</title>
+  <title>About</title>
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/highlight.pack.js"></script>
@@ -21,28 +21,25 @@
   <link rel="stylesheet" href="/css/github.css">
   <link rel="stylesheet" href="/css/heobot.css">
 
-  <meta property="og:title"             content="{{ .Title }}"/>
-  <meta property="twitter:title"        content="{{ .Title }}">
+  <meta property="og:title"             content="About"/>
+  <meta property="twitter:title"        content="About">
 
-  <meta property="og:site_name"         content="{{ .Site.Title }}"/>
-  <meta property="twitter:site"         content="{{ .Site.Title }}">
+  <meta property="og:site_name"         content="importre"/>
+  <meta property="twitter:site"         content="importre">
 
-  <meta property="og:url"               content="{{ .Permalink }}"/>
+  <meta property="og:url"               content="http://blog.import.re/about/"/>
 
-  {{ if .Site.Params.profile }}
-  <meta property="og:image"             content="{{ .Site.Params.profile }}"/>
-  <meta property="twitter:image"        content="{{ .Site.Params.profile }}">
-  {{ else }}
-  <meta property="og:image"             content="/images/brand.png"/>
-  <meta property="twitter:image"        content="/images/brand.png">
-  {{ end }}
+  
+  <meta property="og:image"             content="/images/importre.jpg"/>
+  <meta property="twitter:image"        content="/images/importre.jpg">
+  
 
-  <meta property="twitter:creator"      content="{{ .Site.Params.author }}">
+  <meta property="twitter:creator"      content="Jaewe Heo">
 
-  {{ if .IsPage }}
-  <meta property="og:description"       content="{{ .Summary }}"/>
-  <meta property="twitter:description"  content="{{ .Summary }}">
-  {{ end }}
+  
+  <meta property="og:description"       content=""/>
+  <meta property="twitter:description"  content="">
+  
 
 </head>
 <body>
@@ -59,7 +56,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/">
-            {{ .Site.Title }}
+            importre
           </a>
         </div>
 
@@ -69,9 +66,43 @@
             <li><a href="/post">Archives</a></li>
             <li><a href="/about">About</a></li>
           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
     </div>
   </nav>
 
   <div class="container">
+
+
+<section>
+  <article>
+    <header>
+      <div class="page-header">
+        <h1>
+          About
+        </h1>
+      </div>
+    </header>
+
+    <main>
+      
+    </main>
+  </article>
+</section>
+
+</div>
+
+<footer class="footer">
+  <p>
+    
+    <span>
+      © 2015 Jaewe Heo
+    </span>
+    
+  </p>
+</footer>
+
+
+</body>
+</html>
+

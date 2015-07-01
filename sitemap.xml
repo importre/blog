@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://blog.import.re/</loc>
+    <lastmod>2015-06-03T23:20:27+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.import.re/post/helloworld/</loc>
+    <lastmod>2015-06-03T23:20:27+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.import.re/about/</loc>
+    <lastmod>2015-06-03T05:14:53+09:00</lastmod>
+  </url>
+  
+</urlset>
