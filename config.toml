@@ -1,5 +1,5 @@
 theme = "heobot"
-baseurl = "http://importre.github.io/"
+baseurl = "http://blog.import.re"
 languageCode = "ko-kr"
 title = "importre"
 MetaDataFormat = "toml"
