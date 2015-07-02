@@ -4,6 +4,7 @@ languageCode = "ko-kr"
 title = "blog.import.re"
 MetaDataFormat = "toml"
 paginate = 3
+disqusShortname = "blogimportre"
 
 [params]
   author = "Jaewe Heo"
