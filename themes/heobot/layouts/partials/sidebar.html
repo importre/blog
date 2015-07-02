@@ -10,7 +10,9 @@
         </div>
         <ul class="list-group">
           {{ range $name, $taxonomy := $categories }}
-          <a href="/categories/{{ $name | urlize }}" class="list-group-item">{{ $name }}</a>
+          <a href="/categories/{{ $name | urlize }}" class="list-group-item">
+            {{ $name }}
+          </a>
           {{ end }}
         </ul>
       </div>
@@ -26,7 +28,9 @@
         </div>
         <ul class="list-group">
           {{ range $name, $taxonomy := $tags }}
-          <a href="/tags/{{ $name | urlize }}" class="list-group-item">{{ $name }}</a>
+          <a href="/tags/{{ $name | urlize }}" class="list-group-item">
+            {{ $name }}
+          </a>
           {{ end }}
         </ul>
       </div>
@@ -44,7 +48,9 @@
             {{ end }}
 
             <div class="caption">
-              <h4>{{ .Site.Params.author }}</h4>
+              <h4>{{ .Site.Params.author }}
+                <small> {{ .Site.Params.nickname }}</small>
+              </h4>
               <p>{{ .Site.Params.aboutme }}</p>
             </div>
           </div>
@@ -53,13 +59,22 @@
         <div class="col-xs-6 col-sm-12">
           <ul class="list-group">
             {{ if .Site.Params.github }}
-            <a href="https://github.com/{{ .Site.Params.github }}" class="list-group-item">
+            <a href="https://github.com/{{ .Site.Params.github }}"
+               class="list-group-item">
               <i class="fa fa-github fa-fw"></i> github
             </a>
             {{ end }}
 
+            {{ if .Site.Params.facebook}}
+            <a href="https://facebook.com/{{ .Site.Params.facebook}}"
+               class="list-group-item">
+              <i class="fa fa-facebook fa-fw"></i> facebook
+            </a>
+            {{ end }}
+
             {{ if .Site.Params.twitter}}
-            <a href="https://twitter.com/{{ .Site.Params.twitter}}" class="list-group-item">
+            <a href="https://twitter.com/{{ .Site.Params.twitter}}"
+               class="list-group-item">
               <i class="fa fa-twitter fa-fw"></i> twitter
             </a>
             {{ end }}

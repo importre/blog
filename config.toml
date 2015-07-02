@@ -1,15 +1,17 @@
 theme = "heobot"
 baseurl = "http://blog.import.re"
 languageCode = "ko-kr"
-title = "importre"
+title = "blog.import.re"
 MetaDataFormat = "toml"
 paginate = 3
 
 [params]
   author = "Jaewe Heo"
-#  aboutme = "허재위"
+  nickname = "importre"
+  aboutme = "허재위"
   profile = "/images/importre.jpg"
   github = "importre"
   twitter = "importre"
-  cyear = "2015"
+  facebook = "importre"
+  copyrightYear = "2015"
 #  ga = "UA-44364795-2"

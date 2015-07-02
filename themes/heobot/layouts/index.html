@@ -19,7 +19,9 @@
         <div>
           {{ range .Params.categories }}
           <span class="label label-success">
-            <a href="/categories/{{ . | urlize }}" style="color: white;">{{ . }}</a>
+            <a href="/categories/{{ . | urlize }}" style="color: white;">
+              {{ . }}
+            </a>
           </span>
           &nbsp;
           {{ end }}
