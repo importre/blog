@@ -145,6 +145,6 @@ build/Release
 node_modules
 
 
-# importre.github.io
+# blog.import.re
 public
 .publish
