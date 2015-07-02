@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var ghPages = require('gulp-gh-pages');
 var del = require('delete');
-var shell = require('gulp-shell')
+var shell = require('gulp-shell');
 
 gulp.task('clean', shell.task([
   'rm -rf public'
