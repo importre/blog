@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on importre</title>
+    <title>Posts on blog.import.re</title>
     <link>http://blog.import.re/post/</link>
-    <description>Recent content in Posts on importre</description>
+    <description>Recent content in Posts on blog.import.re</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     <lastBuildDate>Wed, 03 Jun 2015 23:20:27 +0900</lastBuildDate>

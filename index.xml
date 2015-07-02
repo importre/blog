@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>importre</title>
+    <title>blog.import.re</title>
     <link>http://blog.import.re/</link>
-    <description>Recent content on importre</description>
+    <description>Recent content on blog.import.re</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
     <lastBuildDate>Wed, 03 Jun 2015 23:20:27 +0900</lastBuildDate>
@@ -34,7 +34,10 @@ func main() {
       <pubDate>Wed, 03 Jun 2015 05:14:53 +0900</pubDate>
       
       <guid>http://blog.import.re/about/</guid>
-      <description></description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://import.re&#34;&gt;http://import.re&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
     </item>
     
   </channel>
