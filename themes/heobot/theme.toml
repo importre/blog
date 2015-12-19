@@ -2,13 +2,13 @@ name = "heobot"
 license = "MIT"
 #licenselink = "https://github.com/.../.../LICENSE.md"
 description = ""
-homepage = "http://import.re/"
+homepage = "http://import.re"
 tags = ["tags", "categories"]
 features = ["", ""]
 
 [author]
   name = "Jaewe Heo"
-  homepage = ""
+  homepage = "http://import.re"
 
 # If porting an existing theme
 [original]

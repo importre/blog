@@ -2,7 +2,7 @@ theme = "heobot"
 baseurl = "http://blog.import.re"
 languageCode = "ko-kr"
 title = "blog.import.re"
-MetaDataFormat = "toml"
+MetaDataFormat = "yaml"
 paginate = 3
 disqusShortname = "blogimportre"
 
