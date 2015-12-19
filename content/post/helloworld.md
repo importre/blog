@@ -1,7 +1,6 @@
 ---
 categories: ["test"]
 date: "2015-06-03T23:20:27+09:00"
-description: ""
 tags: ["helloworld"]
 title: "Hello World!"
 ---
