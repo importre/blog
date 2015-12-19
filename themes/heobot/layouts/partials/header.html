@@ -22,28 +22,32 @@
   <link rel="stylesheet" href="/css/github.css">
   <link rel="stylesheet" href="/css/heobot.css">
 
-  <meta property="og:type"              content="blog" />
-  <meta property="og:title"             content="{{ .Title }}"/>
-  <meta property="twitter:title"        content="{{ .Title }}">
+  <meta property="og:url"              content="{{ .Permalink }}" />
+  <meta property="og:type"             content="blog" />
+  <meta property="og:title"            content="{{ .Title }}" />
+  <meta property="twitter:title"       content="{{ .Title }}" />
 
-  <meta property="og:site_name"         content="{{ .Site.Title }}"/>
-  <meta property="twitter:site"         content="{{ .Site.Title }}">
-
-  <meta property="og:url"               content="{{ .Permalink }}"/>
+  <meta property="og:site_name"        content="{{ .Site.Title }}" />
+  <meta property="twitter:site"        content="{{ .Site.Title }}" />
 
   {{ if .Site.Params.profile }}
-  <meta property="og:image"             content="{{ .Site.Params.profile }}"/>
-  <meta property="twitter:image"        content="{{ .Site.Params.profile }}">
-  {{ else }}
-  <meta property="og:image"             content="/images/brand.png"/>
-  <meta property="twitter:image"        content="/images/brand.png">
+  <meta property="og:image"            content="{{ .Site.BaseURL }}{{ .Site.Params.profile }}" />
+  <meta property="twitter:image"       content="{{ .Site.BaseURL }}{{ .Site.Params.profile }}" />
   {{ end }}
 
-  <meta property="twitter:creator"      content="{{ .Site.Params.author }}">
+  <meta property="fb:app_id"           content="{{ .Site.Params.fbappid }}">
+  <meta property="og:image:height"     content="{{ .Site.Params.brandsize }}">
+  <meta property="og:image:width"      content="{{ .Site.Params.brandsize }}">
+  <meta property="og:image"            content="{{ .Site.BaseURL }}images/brand.png"/>
+  <meta property="twitter:image"       content="{{ .Site.BaseURL }}images/brand.png" />
+  <meta property="twitter:creator"     content="{{ .Site.Params.author }}" />
 
   {{ if .IsPage }}
-  <meta property="og:description"       content="{{ .Summary }}"/>
-  <meta property="twitter:description"  content="{{ .Summary }}">
+  <meta property="og:description"      content="{{ .Summary }}" />
+  <meta property="twitter:description" content="{{ .Summary }}" />
+  {{ else }}
+  <meta property="og:description"      content="{{ .Site.Params.description }}" />
+  <meta property="twitter:description" content="{{ .Site.Params.description }}" />
   {{ end }}
 
 </head>
