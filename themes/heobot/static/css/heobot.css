@@ -27,3 +27,8 @@ pre code {
 .side {
   padding-top: 50px; 
 }
+
+.contents > h1, h2 {
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eee;
+}
