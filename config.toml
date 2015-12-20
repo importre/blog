@@ -3,7 +3,7 @@ baseurl = "http://blog.import.re"
 languageCode = "ko-kr"
 title = "blog.import.re"
 MetaDataFormat = "yaml"
-paginate = 3
+paginate = 5
 disqusShortname = "blogimportre"
 
 [params]

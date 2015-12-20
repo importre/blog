@@ -7,14 +7,14 @@
     <section>
       <article>
         <header>
-          <div class="page-header">
-            <h1>
-              <a href="{{ .Permalink }}">{{ .Title }}</a>
-            </h1>
-          </div>
+          <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+          <hr />
         </header>
         <main>
-          {{ partial "contents.html" . }}
+          <div class="contents">
+            {{ partial "post-info.html" . }}
+            {{ .Summary }}
+          </div>
         </main>
         <div>
           {{ range .Params.categories }}

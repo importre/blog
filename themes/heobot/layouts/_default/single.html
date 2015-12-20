@@ -1,12 +1,12 @@
 {{ partial "header.html" . }}
 
-<div class="page-header">
-  <h1>
-    {{ .Title }}
-  </h1>
-</div>
+<h1>{{ .Title }}</h1>
+<hr />
 
-{{ partial "contents.html" . }}
+<div class="contents">
+  {{ partial "post-info.html" . }}
+  {{ .Content }}
+</div>
 
 <br/>
 
