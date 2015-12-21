@@ -7,10 +7,10 @@
 
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="http://blog.import.re/">
-  <link href="http://blog.import.re/index.xml" rel="alternate" type="application/rss+xml" title="blog.import.re"/>
+  <link rel="canonical" href="http://blog.import.re/post/kotlin-with-gradle/">
+  <link href="" rel="alternate" type="application/rss+xml" title="blog.import.re"/>
 
-  <title>blog.import.re</title>
+  <title>kotlin with gradle</title>
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/highlight.pack.js"></script>
@@ -21,10 +21,10 @@
   <link rel="stylesheet" href="/css/github.css">
   <link rel="stylesheet" href="/css/heobot.css">
 
-  <meta property="og:url"              content="http://blog.import.re/" />
+  <meta property="og:url"              content="http://blog.import.re/post/kotlin-with-gradle/" />
   <meta property="og:type"             content="blog" />
-  <meta property="og:title"            content="blog.import.re" />
-  <meta property="twitter:title"       content="blog.import.re" />
+  <meta property="og:title"            content="kotlin with gradle" />
+  <meta property="twitter:title"       content="kotlin with gradle" />
 
   <meta property="og:site_name"        content="blog.import.re" />
   <meta property="twitter:site"        content="blog.import.re" />
@@ -42,8 +42,8 @@
   <meta property="twitter:creator"     content="Jaewe Heo" />
 
   
-  <meta property="og:description"      content="importre (heobot)" />
-  <meta property="twitter:description" content="importre (heobot)" />
+  <meta property="og:description"      content="프로젝트 폴더 초기화 아래와 같은 명령을 통해 프로젝트 폴더(여기서는 playkotlin)를 초기화를 한다. 여기서 Gradle은 2.9를 사용하였다. $ mkdir playkotlin &amp;&amp; cd $_ $ gradle init 결과는 아래와 같다. $ tree . ├── build.gradle ├── gradle │ └── wrapper │ ├── gradle-wrapper.jar │ └── gradle-wrapper.properties ├── gradlew ├── gradlew.bat └── settings.gradle 2 directories, 6 files build.gradle 작성 생성된 build.gradle 파일을 아래와 같이 작성한다. 보다 자세한 내용은 여기를 참고하라. buildscript { ext.kotlin_version = &#39;1.0.0-beta-3595&#39; repositories { jcenter() } dependencies { classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot; } } apply plugin: &#39;kotlin&#39; sourceSets { main.java.srcDirs &#43;= &#39;src/main/kotlin&#39; } repositories { jcenter() } dependencies { compile &quot;org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version&quot; } main 메소드 작성하기 패키지(여기서는 io.github.importre.playkotlin) 폴더를 만들고, $ mkdir -p src/main/kotlin/io/github/importre/playkotlin main.kt 파일을 생성하여 아래와 같이 작성한다." />
+  <meta property="twitter:description" content="프로젝트 폴더 초기화 아래와 같은 명령을 통해 프로젝트 폴더(여기서는 playkotlin)를 초기화를 한다. 여기서 Gradle은 2.9를 사용하였다. $ mkdir playkotlin &amp;&amp; cd $_ $ gradle init 결과는 아래와 같다. $ tree . ├── build.gradle ├── gradle │ └── wrapper │ ├── gradle-wrapper.jar │ └── gradle-wrapper.properties ├── gradlew ├── gradlew.bat └── settings.gradle 2 directories, 6 files build.gradle 작성 생성된 build.gradle 파일을 아래와 같이 작성한다. 보다 자세한 내용은 여기를 참고하라. buildscript { ext.kotlin_version = &#39;1.0.0-beta-3595&#39; repositories { jcenter() } dependencies { classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot; } } apply plugin: &#39;kotlin&#39; sourceSets { main.java.srcDirs &#43;= &#39;src/main/kotlin&#39; } repositories { jcenter() } dependencies { compile &quot;org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version&quot; } main 메소드 작성하기 패키지(여기서는 io.github.importre.playkotlin) 폴더를 만들고, $ mkdir -p src/main/kotlin/io/github/importre/playkotlin main.kt 파일을 생성하여 아래와 같이 작성한다." />
   
 
 </head>
@@ -80,19 +80,11 @@
 <div class="container">
 
 
+<h1>kotlin with gradle</h1>
+<hr />
 
-<div class="row">
-  <div class="col-md-9">
-    
-    <section>
-      <article>
-        <header>
-          <h1><a href="http://blog.import.re/post/kotlin-with-gradle/">kotlin with gradle</a></h1>
-          <hr />
-        </header>
-        <main>
-          <div class="contents">
-            <div>
+<div class="contents">
+  <div>
   <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
   December 21, 2015
   &nbsp;
@@ -105,7 +97,7 @@
 </div>
 <br />
 
-            
+  
 
 <h2 id="프로젝트-폴더-초기화:b6f6bdcdb97e7df203a4a002bda8b448">프로젝트 폴더 초기화</h2>
 
@@ -223,123 +215,50 @@ Total time: 4.978 secs
 <li>당연한 얘기지만 IntelliJ를 사용하면 편하다.</li>
 </ul>
 
-          </div>
-        </main>
-        <div>
-          
-          <span class="label label-success">
-            <a href="/categories/kotlin" style="color: white;">
-              kotlin
-            </a>
-          </span>
-          &nbsp;
-          
-        </div>
-      </article>
-    </section>
-    <br/>
-    
-    
-    
-  </div>
-
-  <div class="col-md-3">
-    <section class="side">
-
-  <div class="row">
-    <div class="col-xs-12 col-sm-4 col-md-12">
-      
-      
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Categories</h3>
-        </div>
-        <ul class="list-group">
-          
-          <a href="/categories/kotlin" class="list-group-item">
-            kotlin
-          </a>
-          
-        </ul>
-      </div>
-      
-    </div>
-
-    <div class="col-xs-12 col-sm-4 col-md-12">
-      
-      
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Tags</h3>
-        </div>
-        <ul class="list-group">
-          
-          <a href="/tags/file" class="list-group-item">
-            file
-          </a>
-          
-          <a href="/tags/gradle" class="list-group-item">
-            gradle
-          </a>
-          
-          <a href="/tags/jvmname" class="list-group-item">
-            jvmname
-          </a>
-          
-        </ul>
-      </div>
-      
-    </div>
-
-    <div class="col-xs-12 col-sm-4 col-md-12">
-      <div class="row">
-        <div class="col-xs-6 col-sm-12">
-          <div class="thumbnail">
-            
-            <img src="images/importre.jpg">
-            
-
-            <div class="caption">
-              <h4>Jaewe Heo
-                <small> importre</small>
-              </h4>
-              <p>허재위</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-6 col-sm-12">
-          <ul class="list-group">
-            
-            <a href="https://github.com/importre"
-               class="list-group-item">
-              <i class="fa fa-github fa-fw"></i> github
-            </a>
-            
-
-            
-            <a href="https://facebook.com/importre"
-               class="list-group-item">
-              <i class="fa fa-facebook fa-fw"></i> facebook
-            </a>
-            
-
-            
-            <a href="https://twitter.com/importre"
-               class="list-group-item">
-              <i class="fa fa-twitter fa-fw"></i> twitter
-            </a>
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-  </div>
 </div>
+
+<br/>
+
+
+<div>
+  <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/gradle" style="color: white;">gradle</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/jvmname" style="color: white;">JvmName</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/file" style="color: white;">@file</a>
+  </span>
+  &nbsp;
+  
+</div>
+
+
+<hr/>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'blogimportre';
+    var disqus_identifier = 'http:\/\/blog.import.re\/post\/kotlin-with-gradle\/';
+    var disqus_title = 'kotlin with gradle';
+    var disqus_url = 'http:\/\/blog.import.re\/post\/kotlin-with-gradle\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 </div>
 

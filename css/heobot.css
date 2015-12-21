@@ -1,14 +1,3 @@
-/*@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);*/
-/*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
-/*@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);*/
-
-body { 
-  padding-top: 50px; 
-  /*font-family: 'Jeju Gothic', sans-serif;*/
-  /*font-family: 'Nanum Gothic', sans-serif;*/
-  /*font-family: 'Hanna', sans-serif;*/
-}
-
 pre code {
   overflow-x: auto;
   word-wrap: normal;
@@ -21,9 +10,50 @@ pre code {
 
 .footer {
   text-align: center;
-  padding: 50px; 
+  padding: 50px;
 }
 
-.side {
-  padding-top: 50px; 
+.contents > h1, h2 {
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar {
+  border-radius: 0px;
+}
+
+table {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+table tr {
+  border-top: 1px solid #cccccc;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+table tr th {
+  border: 1px solid #cccccc;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+table tr td {
+  border: 1px solid #cccccc;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+blockquote {
+  font-size: 1em;
+  margin-left: 10px;
+  color: #787878;
 }

@@ -6,25 +6,132 @@
     <description>Recent content on blog.import.re</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 03 Jun 2015 23:20:27 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 21 Dec 2015 17:59:55 +0900</lastBuildDate>
     <atom:link href="http://blog.import.re/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Hello World!</title>
-      <link>http://blog.import.re/post/helloworld/</link>
-      <pubDate>Wed, 03 Jun 2015 23:20:27 +0900</pubDate>
+      <title>kotlin with gradle</title>
+      <link>http://blog.import.re/post/kotlin-with-gradle/</link>
+      <pubDate>Mon, 21 Dec 2015 17:59:55 +0900</pubDate>
       
-      <guid>http://blog.import.re/post/helloworld/</guid>
-      <description>&lt;p&gt;글이 없으면 실행이 안돼서 &lt;code&gt;Hello World!&lt;/code&gt;&lt;/p&gt;
+      <guid>http://blog.import.re/post/kotlin-with-gradle/</guid>
+      <description>
 
-&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+&lt;h2 id=&#34;프로젝트-폴더-초기화:b6f6bdcdb97e7df203a4a002bda8b448&#34;&gt;프로젝트 폴더 초기화&lt;/h2&gt;
 
-import &amp;quot;fmt&amp;quot;
+&lt;p&gt;아래와 같은 명령을 통해 프로젝트 폴더(여기서는 &lt;code&gt;playkotlin&lt;/code&gt;)를 초기화를 한다.&lt;br /&gt;
+여기서 Gradle은 2.9를 사용하였다.&lt;/p&gt;
 
-func main() {
-  fmt.Println(&amp;quot;Hello World!&amp;quot;)
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mkdir playkotlin &amp;amp;&amp;amp; cd $_
+$ gradle init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;결과는 아래와 같다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tree
+.
+├── build.gradle
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
+├── gradlew.bat
+└── settings.gradle
+
+2 directories, 6 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;build-gradle-작성:b6f6bdcdb97e7df203a4a002bda8b448&#34;&gt;build.gradle 작성&lt;/h2&gt;
+
+&lt;p&gt;생성된 &lt;code&gt;build.gradle&lt;/code&gt; 파일을 아래와 같이 작성한다. 보다 자세한 내용은 &lt;a href=&#34;https://goo.gl/L0iVVX&#34;&gt;여기&lt;/a&gt;를 참고하라.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;buildscript {
+    ext.kotlin_version = &#39;1.0.0-beta-3595&#39;
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath &amp;quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&amp;quot;
+    }
+}
+
+apply plugin: &#39;kotlin&#39;
+
+sourceSets {
+    main.java.srcDirs += &#39;src/main/kotlin&#39;
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile &amp;quot;org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version&amp;quot;
 }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;main-메소드-작성하기:b6f6bdcdb97e7df203a4a002bda8b448&#34;&gt;main 메소드 작성하기&lt;/h2&gt;
+
+&lt;p&gt;패키지(여기서는 &lt;code&gt;io.github.importre.playkotlin&lt;/code&gt;) 폴더를 만들고,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mkdir -p src/main/kotlin/io/github/importre/playkotlin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;main.kt&lt;/code&gt; 파일을 생성하여 아래와 같이 작성한다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;package io.github.importre.playkotlin
+
+fun main(args: Array&amp;lt;String&amp;gt;) {
+    println(&amp;quot;hello playkotlin&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;실행하기:b6f6bdcdb97e7df203a4a002bda8b448&#34;&gt;실행하기&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://goo.gl/00pKf3&#34;&gt;&lt;code&gt;application&lt;/code&gt; 플러그인&lt;/a&gt;을 이용하여
+Gradle로 실행할 수 있도록 &lt;code&gt;build.gradle&lt;/code&gt;에 아래 라인을 추가한다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;apply plugin: &#39;application&#39;
+
+mainClassName = &amp;quot;io.github.importre.playkotlin.MainKt&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;최종 수정된 파일은 &lt;a href=&#34;https://goo.gl/Ed6Vy5&#34;&gt;여기&lt;/a&gt;를 참고하라.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;메인 클래스 이름이 &lt;code&gt;MainKt&lt;/code&gt; 인 이유는 &lt;a href=&#34;https://goo.gl/XkRvXS&#34;&gt;kotlinc(코틀린 컴파일러)&lt;/a&gt;에 의해 자동 생성됐기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;자바와 다르게 코틀린은 파일에서 항상 클래스를 가질 필요가 없다.
+하지만 &lt;code&gt;.class&lt;/code&gt; 파일을 생성한다. 생성되는 파일의 이름을 바꾸려면 &lt;code&gt;package&lt;/code&gt;를 선언하기 전에
+&lt;code&gt;@file:JvmName()&lt;/code&gt;을 사용하면 원하는 이름으로 생성할 수 있다.&lt;br /&gt;
+보다 자세한 예는 &lt;a href=&#34;https://goo.gl/BVa2CR&#34;&gt;여기&lt;/a&gt;를 참고하라.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;application&lt;/code&gt; 플러그인의 &lt;code&gt;run&lt;/code&gt; task를 이용하여 실행하면 아래와 같은 결과를 확인할 수 있다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ./gradlew run
+
+:compileKotlin
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:run
+hello playkotlin
+
+BUILD SUCCESSFUL
+
+Total time: 4.978 secs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;느낀점:b6f6bdcdb97e7df203a4a002bda8b448&#34;&gt;느낀점&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://goo.gl/MEsvt5&#34;&gt;Gradle init의 type&lt;/a&gt;에 &lt;code&gt;kotlin-library&lt;/code&gt;가 있었으면 좋겠다.&lt;/li&gt;
+&lt;li&gt;당연한 얘기지만 IntelliJ를 사용하면 편하다.&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
