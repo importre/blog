@@ -125,10 +125,11 @@ Total time: 4.978 secs
 ```
 
 
-## 느낀점
+## 결론
 
 - [Gradle init의 type][gradle-init]에 `kotlin-library`가 있었으면 좋겠다.
 - 당연한 얘기지만 IntelliJ를 사용하면 편하다.
+- 최종 소스는 [여기][playkotlin]에 있다.
 
 
 
@@ -138,3 +139,4 @@ Total time: 4.978 secs
 [calling-kt-from-java]: https://goo.gl/BVa2CR
 [kotlinc]: https://goo.gl/XkRvXS
 [gradle-init]: https://goo.gl/MEsvt5
+[playkotlin]: https://goo.gl/KIupk2
