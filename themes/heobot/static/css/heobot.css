@@ -51,3 +51,9 @@ table tr td {
   margin: 0;
   padding: 6px 13px;
 }
+
+blockquote {
+  font-size: 1em;
+  margin-left: 10px;
+  color: #787878;
+}
