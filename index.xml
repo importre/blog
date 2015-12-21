@@ -126,11 +126,12 @@ BUILD SUCCESSFUL
 Total time: 4.978 secs
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;느낀점:b6f6bdcdb97e7df203a4a002bda8b448&#34;&gt;느낀점&lt;/h2&gt;
+&lt;h2 id=&#34;결론:b6f6bdcdb97e7df203a4a002bda8b448&#34;&gt;결론&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://goo.gl/MEsvt5&#34;&gt;Gradle init의 type&lt;/a&gt;에 &lt;code&gt;kotlin-library&lt;/code&gt;가 있었으면 좋겠다.&lt;/li&gt;
 &lt;li&gt;당연한 얘기지만 IntelliJ를 사용하면 편하다.&lt;/li&gt;
+&lt;li&gt;최종 소스는 &lt;a href=&#34;https://goo.gl/KIupk2&#34;&gt;여기&lt;/a&gt;에 있다.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
