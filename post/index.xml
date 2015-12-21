@@ -17,6 +17,8 @@
       <guid>http://blog.import.re/post/kotlin-with-gradle/</guid>
       <description>
 
+&lt;p&gt;Gradle과 함께 코틀린을 시작하는 방법을 설명한다.&lt;/p&gt;
+
 &lt;h2 id=&#34;프로젝트-폴더-초기화:b6f6bdcdb97e7df203a4a002bda8b448&#34;&gt;프로젝트 폴더 초기화&lt;/h2&gt;
 
 &lt;p&gt;아래와 같은 명령을 통해 프로젝트 폴더(여기서는 &lt;code&gt;playkotlin&lt;/code&gt;)를 초기화를 한다.&lt;br /&gt;
