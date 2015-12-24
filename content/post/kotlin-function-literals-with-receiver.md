@@ -6,7 +6,7 @@ tags: [function, literal, receiver, anko]
 title: Function Literals with Receiver
 ---
 
-코틀린에서는 리시버 객체와 함께 함수 리터럴을 호출할 수 있는 기능을 제공합니다.
+코틀린에서는 리시버 객체와 함께 함수 리터럴을 호출할 수 있는 기능을 제공합니다.  
 함수 리터럴 안에서는 리시버의 메소드와 변수를 바로 사용할 수 있습니다.
 
 <!--more-->
@@ -45,7 +45,7 @@ public inline fun <T, R> T.run(f: T.() -> R): R = f()
 ## 활용
 
 **Function Literals with Receiver**를 활용한 대표적인 예로는
-[Type Safe Builder][type-safe-builder]가 있습니다.
+[Type Safe Builder][type-safe-builder]가 있습니다.  
 또한 [Anko][anko] 역시 이를 활용한 JetBrains의 안드로이드 라이브러리로,
 xml 대신에 DSL로 UI를 그릴 수 있도록 도와줍니다.
 

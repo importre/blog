@@ -13,7 +13,7 @@ Gradle과 함께 코틀린을 시작하는 방법을 설명합니다.
 
 ## 프로젝트 폴더 초기화
 
-아래와 같은 명령을 통해 프로젝트 폴더(여기서는 `playkotlin`)를 초기화를 합니다.
+아래와 같은 명령을 통해 프로젝트 폴더(여기서는 `playkotlin`)를 초기화를 합니다.  
 여기서 Gradle은 2.9를 사용했습니다.
 
 ```sh
@@ -44,6 +44,7 @@ $ tree
 
 ```gradle
 buildscript {
+    // 글 작성 당시의 버전입니다. 사용하실 때 버전은 최신 버전으로!
     ext.kotlin_version = '1.0.0-beta-3595'
 
     repositories {

@@ -2,11 +2,11 @@
 categories: [kotlin]
 date: 2015-12-23T18:23:05+09:00
 homepage: ""
-tags: [let, with, run, apply, use]
-title: let, with, run, apply, use
+tags: [let, with, run, apply, use, using]
+title: let, with, run, apply, use(using)
 ---
 
-혹시 코틀린에서 `let`, `run`, `apply` 함수를 보신적이 있으신가요?
+혹시 코틀린에서 `let`, `run`, `apply` 함수를 보신적이 있으신가요?  
 안드로이드를 개발할 때 코틀린을 사용하고 있는데, 자동완성할 때 위와 같은 함수들이 떠서 뭐길래 뜨는지 궁금해서 찾아보았습니다.
 
 이번 글은 위와같이 코틀린에서 미리 정의된 몇몇 함수들에 대해 설명하고자 합니다.<!--more-->
@@ -63,12 +63,12 @@ if (files != null) {
 public inline fun <T, R> with(receiver: T, f: T.() -> R): R = receiver.f()
 ```
 
-앞서 살펴본 `let`과 다르게 `T`를 확장하지 않고 `with`의 첫번째 파라미터(`receiver`)로 넘깁니다.
+앞서 살펴본 `let`과 다르게 `T`를 확장하지 않고 `with`의 첫번째 파라미터(`receiver`)로 넘깁니다.  
 `with`는 결과적으로 `receiver.f()`를 실행하고 `f`의 리턴값을 그대로 리턴합니다.
 
 두번째 파라미터의 원형은 `T.() -> R`로 되어있는데, `T` 옆에 `.`이 보이시나요?
-우리가 알고있는 람다의 일반적인 정의와는 조금 다른 모양을 취하고 있습니다.
-간단히 설명드리자면, 두번째 파라미터인 람다 내부에서는 `T`의 접근 가능한 멤버 함수와 변수를 `dot notation`없이 바로 사용할 수 있습니다.
+우리가 알고있는 람다의 일반적인 정의와는 조금 다른 모양을 취하고 있습니다.  
+간단히 설명드리자면, 두번째 파라미터인 람다 내부에서는 `T`의 접근 가능한 멤버 함수와 변수를 `dot notation`없이 바로 사용할 수 있습니다.  
 자세한 설명은 [Function Literals with Receiver [1]][fun-liternal-receiver1]과 [[2]][fun-liternal-receiver2]를 참고바랍니다.
 
 
