@@ -53,11 +53,16 @@ table tr td {
 }
 
 blockquote {
+  color: #787878;
   font-size: 1em;
   margin-left: 10px;
-  color: #787878;
+  padding: 5px 20px;
 }
 
 .tag {
   margin: 1px;
+}
+
+.like {
+  margin-top: 20px;
 }

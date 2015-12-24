@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
 
 <h1>{{ .Title }}</h1>
-<hr />
+<hr/>
 
 <div class="contents">
   {{ partial "post-info.html" . }}
@@ -9,11 +9,10 @@
 </div>
 
 <br/>
+<hr/>
 
 {{ if .Params.tags }}
 <div>
-  <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-  &nbsp;
   {{ range .Params.tags }}
   <span class="label label-primary">
     <a href="/tags/{{ . | urlize }}" style="color: white;">{{ . }}</a>
@@ -22,6 +21,11 @@
   {{ end }}
 </div>
 {{ end }}
+
+<div class="like">
+  <div class="fb-like " data-href="{{ .Permalink }}" data-layout="button"
+       data-action="like" data-show-faces="true" data-share="true"></div>
+</div>
 
 <hr/>
 
