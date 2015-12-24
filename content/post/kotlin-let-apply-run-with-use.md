@@ -144,7 +144,7 @@ val user = User("importre").apply {
 
 ### 함수 원형
 ```kotlin
-public inline fun <T : Closeable, R> T.use(block: (T) -> R): R { ...... }
+public inline fun <T : Closeable, R> T.use(block: (T) -> R): R { /* 생략 */ }
 ```
 
 `Closeable` 인터페이스가 구현된 클래스에 한해 `use`를 사용하실 수 있습니다.
