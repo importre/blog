@@ -50,6 +50,17 @@
 
 <body>
 
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1706988242848832";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="container-fluid">
@@ -90,7 +101,7 @@
   
   <li>
     <h4>
-      <a href="http://blog.import.re/post/kotlin-with-gradle/">kotlin with gradle</a>
+      <a href="http://blog.import.re/post/kotlin-with-gradle/">Kotlin with Gradle</a>
       <small>
         <span>/ December 21</span>
       </small>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="http://blog.import.re/post/kotlin-let-apply-run-with-use/">
+  <link href="" rel="alternate" type="application/rss+xml" title="blog.import.re"/>
+
+  <title>let, with, run, apply, use(using)</title>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/github.css">
+  <link rel="stylesheet" href="/css/heobot.css">
+
+  <meta property="og:url"              content="http://blog.import.re/post/kotlin-let-apply-run-with-use/" />
+  <meta property="og:type"             content="blog" />
+  <meta property="og:title"            content="let, with, run, apply, use(using)" />
+  <meta property="twitter:title"       content="let, with, run, apply, use(using)" />
+
+  <meta property="og:site_name"        content="blog.import.re" />
+  <meta property="twitter:site"        content="blog.import.re" />
+
+  
+  <meta property="og:image"            content="http://blog.import.re/images/importre.jpg" />
+  <meta property="twitter:image"       content="http://blog.import.re/images/importre.jpg" />
+  
+
+  <meta property="fb:app_id"           content="1706988242848832">
+  <meta property="og:image:height"     content="200">
+  <meta property="og:image:width"      content="200">
+  <meta property="og:image"            content="http://blog.import.re/images/brand.png"/>
+  <meta property="twitter:image"       content="http://blog.import.re/images/brand.png" />
+  <meta property="twitter:creator"     content="Jaewe Heo" />
+
+  
+  <meta property="og:description"      content="혹시 코틀린에서 let, run, apply 함수를 보신적이 있으신가요?
+안드로이드를 개발할 때 코틀린을 사용하고 있는데, 자동완성할 때 위와 같은 함수들이 떠서 뭐길래 뜨는지 궁금해서 찾아보았습니다.
+
+이번 글은 위와같이 코틀린에서 미리 정의된 몇몇 함수들에 대해 설명하고자 합니다.
+" />
+  <meta property="twitter:description" content="혹시 코틀린에서 let, run, apply 함수를 보신적이 있으신가요?
+안드로이드를 개발할 때 코틀린을 사용하고 있는데, 자동완성할 때 위와 같은 함수들이 떠서 뭐길래 뜨는지 궁금해서 찾아보았습니다.
+
+이번 글은 위와같이 코틀린에서 미리 정의된 몇몇 함수들에 대해 설명하고자 합니다.
+" />
+  
+
+</head>
+
+<body>
+
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1706988242848832";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          blog.import.re
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/post">Archives</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+
+<h1>let, with, run, apply, use(using)</h1>
+<hr/>
+
+<div class="contents">
+  <div>
+  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+  December 23, 2015
+  &nbsp;
+  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+  
+  Jaewe Heo
+  
+
+  
+</div>
+<br />
+
+  
+
+<p>혹시 코틀린에서 <code>let</code>, <code>run</code>, <code>apply</code> 함수를 보신적이 있으신가요?<br />
+안드로이드를 개발할 때 코틀린을 사용하고 있는데, 자동완성할 때 위와 같은 함수들이 떠서 뭐길래 뜨는지 궁금해서 찾아보았습니다.</p>
+
+<p>이번 글은 위와같이 코틀린에서 미리 정의된 몇몇 함수들에 대해 설명하고자 합니다.
+설명할 함수는 아래와 같이 정의되어 있습니다.</p>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; T.let(f: (T) -&gt; R): R = f(this)
+public inline fun &lt;T, R&gt; with(receiver: T, f: T.() -&gt; R): R = receiver.f()
+public inline fun &lt;T, R&gt; T.run(f: T.() -&gt; R): R = f()
+public inline fun &lt;T&gt; T.apply(f: T.() -&gt; Unit): T { f(); return this }
+public inline fun &lt;T : Closeable, R&gt; T.use(block: (T) -&gt; R): R { /* 생략 */ }
+</code></pre>
+
+<h2 id="let:ad187f4ec98ea3248bea3fc74358c1db">let</h2>
+
+<h3 id="함수-원형:ad187f4ec98ea3248bea3fc74358c1db">함수 원형</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; T.let(f: (T) -&gt; R): R = f(this)
+</code></pre>
+
+<p>임의의 <code>T</code> 타입에 <code>let</code>이라는 함수를 확장(<a href="https://goo.gl/EN6bTs">Extension</a>)했고,
+<code>let</code>의 파라미터로는 타입이 <code>(T) -&gt; R</code> 인 람다 <code>f</code>를 갖습니다.</p>
+
+<p>결과적으로 <code>f(this)</code>를 호출하고, 람다의 리턴값인 타입 <code>R</code>을 그대로 리턴합니다.</p>
+
+<blockquote>
+<p><code>f</code>를 호출할 때 넘기는 <code>this</code>는 <code>T</code>의 인스턴스이기 때문에
+<code>f</code> 블럭 내에서 첫번째 파라미터로 사용 가능한 것입니다.</p>
+</blockquote>
+
+<h3 id="예제:ad187f4ec98ea3248bea3fc74358c1db">예제</h3>
+
+<p>보통 <strong>not</strong> <code>null</code>인 경우 해당 블럭을 실행하는데 쓰입니다.</p>
+
+<pre><code class="language-kotlin">File(&quot;/usr/local&quot;).list()?.let {
+    // `it`은 File(&quot;/usr/local&quot;).list()이 되겠지요.
+    println(it.size)
+}
+</code></pre>
+
+<p>참고로 자바라면 아래와 같이 사용했을 것입니다.</p>
+
+<pre><code class="language-kotlin">val files = File(&quot;/usr/local&quot;).list()
+if (files != null) {
+    println(files.size)
+}
+</code></pre>
+
+<h2 id="with:ad187f4ec98ea3248bea3fc74358c1db">with</h2>
+
+<h3 id="함수-원형-1:ad187f4ec98ea3248bea3fc74358c1db">함수 원형</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; with(receiver: T, f: T.() -&gt; R): R = receiver.f()
+</code></pre>
+
+<p>앞서 살펴본 <code>let</code>과 다르게 <code>T</code>를 확장하지 않고 <code>with</code>의 첫번째 파라미터(<code>receiver</code>)로 넘깁니다.<br />
+<code>with</code>는 결과적으로 <code>receiver.f()</code>를 실행하고 <code>f</code>의 리턴값을 그대로 리턴합니다.</p>
+
+<p>두번째 파라미터의 원형은 <code>T.() -&gt; R</code>로 되어있는데, <code>T</code> 옆에 <code>.</code>이 보이시나요?
+우리가 알고있는 람다의 일반적인 정의와는 조금 다른 모양을 취하고 있습니다.<br />
+간단히 설명드리자면, 두번째 파라미터인 람다 내부에서는 <code>T</code>의 접근 가능한 멤버 함수와 변수를 <code>dot notation</code>없이 바로 사용할 수 있습니다.<br />
+자세한 설명은 <a href="/post/kotlin-function-literals-with-receiver/">Function Literals with Receiver [1]</a>과 <a href="https://goo.gl/yo7b85">[2]</a>를 참고바랍니다.</p>
+
+<h3 id="예제-1:ad187f4ec98ea3248bea3fc74358c1db">예제</h3>
+
+<pre><code class="language-kotlin">// User 클래스가 아래와 같을 때,
+data class User(val name: String,
+                var email: String? = null,
+                var profile: String? = null)
+
+val user = User(&quot;importre&quot;)
+
+// `User`의 멤버 변수인 `email`, `profile`을
+// `with` 블럭 내에서 바로 접근하는 것을 확인할 수 있습니다.
+with (user) {
+    email = &quot;importre@example.com&quot;
+    profile = &quot;http://path/to&quot;
+}
+println(user)
+</code></pre>
+
+<p>실행 결과는 아래와 같습니다.</p>
+
+<pre><code class="language-sh">User(name=importre, email=importre@example.com, profile=http://path/to)
+</code></pre>
+
+<h2 id="run:ad187f4ec98ea3248bea3fc74358c1db">run</h2>
+
+<h3 id="함수-원형-2:ad187f4ec98ea3248bea3fc74358c1db">함수 원형</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; T.run(f: T.() -&gt; R): R = f()
+</code></pre>
+
+<p>원형을 보면<code>let</code>과 <code>with</code>가 합쳐진 것을 알 수 있습니다.</p>
+
+<h3 id="run-example:ad187f4ec98ea3248bea3fc74358c1db">예제</h3>
+
+<pre><code class="language-kotlin">val user = User(&quot;importre&quot;).run {
+    email = &quot;importre@example.com&quot;
+    profile = &quot;http://path/to&quot;
+    this
+}
+</code></pre>
+
+<p>run의 리턴 값이 <code>R</code>이기 때문에 <code>User</code>를 쓰고 싶으면 <code>this</code>를 리턴해주면 됩니다.</p>
+
+<h2 id="apply:ad187f4ec98ea3248bea3fc74358c1db">apply</h2>
+
+<h3 id="함수-원형-3:ad187f4ec98ea3248bea3fc74358c1db">함수 원형</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T&gt; T.apply(f: T.() -&gt; Unit): T { f(); return this }
+</code></pre>
+
+<p><code>run</code>과 상당히 비슷해보이죠? <code>f</code>의 리턴 값은 아무 것도 없고(<code>Unit</code>),
+그냥 <code>f</code>를 실행한 다음에 <code>this</code>를 리턴합니다.</p>
+
+<h3 id="예제-2:ad187f4ec98ea3248bea3fc74358c1db">예제</h3>
+
+<pre><code class="language-kotlin">val user = User(&quot;importre&quot;).apply {
+    email = &quot;importre@example.com&quot;
+    profile = &quot;http://path/to&quot;
+}
+</code></pre>
+
+<p><a href="#run-example:ad187f4ec98ea3248bea3fc74358c1db">run의 예제</a>와 동일하게 동작하는 예제입니다.
+<code>Builder</code> 패턴이 구현되지 않은 클래스를 초기화를 할 때 아주 유용해 보입니다.</p>
+
+<h2 id="use:ad187f4ec98ea3248bea3fc74358c1db">use</h2>
+
+<h3 id="함수-원형-4:ad187f4ec98ea3248bea3fc74358c1db">함수 원형</h3>
+
+<pre><code class="language-kotlin">public inline fun &lt;T : Closeable, R&gt; T.use(block: (T) -&gt; R): R { /* 생략 */ }
+</code></pre>
+
+<p><code>Closeable</code> 인터페이스가 구현된 클래스에 한해 <code>use</code>를 사용하실 수 있습니다.
+<a href="https://goo.gl/nHreuO">내부 구현</a>을 보면 <code>Exception</code>이 발생하거나 말거나 항상 <code>close()</code>를 호출을 보장합니다.</p>
+
+<blockquote>
+<p>내부 구현의 TODO 주석을 보니 패키지도 바뀌고 함수 이름도 <code>using</code>으로 바뀌려나 봅니다.</p>
+</blockquote>
+
+<h3 id="예제-3:ad187f4ec98ea3248bea3fc74358c1db">예제</h3>
+
+<pre><code class="language-kotlin">PrintWriter(FileOutputStream(&quot;output.txt&quot;)).use {
+    it.println(&quot;hello&quot;)
+}
+</code></pre>
+
+<p><code>output.txt</code> 파일에 <code>hello</code>라는 문자열을 저장하는 코드입니다.
+일반적으로 파일 작업을 하고나면 <code>close()</code>를 명시적으로 호출해야하는데,
+<code>use</code> 블럭 내에서는 그럴 필요가 없습니다.</p>
+
+<p><code>Closeable</code> 인스턴스가 아닌 다른 인스턴스를 사용하는데 위와 같이 반드시 처리해야하는 일이 있다면 <code>use</code>와 같이 새로운 함수를 정의해서 특정 객체를 확장하는 것도 생각해볼 만합니다. :^)</p>
+
+<h2 id="정리:ad187f4ec98ea3248bea3fc74358c1db">정리</h2>
+
+<ul>
+<li>몰라도 되는 것이지만 알면 꿀!</li>
+</ul>
+
+</div>
+
+<br/>
+<hr/>
+
+
+<div>
+  
+  <span class="label label-primary">
+    <a href="/tags/let" style="color: white;">let</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/with" style="color: white;">with</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/run" style="color: white;">run</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/apply" style="color: white;">apply</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/use" style="color: white;">use</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/using" style="color: white;">using</a>
+  </span>
+  &nbsp;
+  
+</div>
+
+
+<div class="like">
+  <div class="fb-like " data-href="http://blog.import.re/post/kotlin-let-apply-run-with-use/" data-layout="button"
+       data-action="like" data-show-faces="true" data-share="true"></div>
+</div>
+
+<hr/>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'blogimportre';
+    var disqus_identifier = 'http:\/\/blog.import.re\/post\/kotlin-let-apply-run-with-use\/';
+    var disqus_title = 'let, with, run, apply, use(using)';
+    var disqus_url = 'http:\/\/blog.import.re\/post\/kotlin-let-apply-run-with-use\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+<footer class="footer">
+  <small>
+    Code licensed under the <a href="https://github.com/importre/blog/blob/master/license">MIT License</a>
+    and the docs are licensed under
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+  </small>
+</footer>
+
+
+  <script>
+    if (window.location.hostname != "localhost") {
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create', "UA-64739906-2");ga('send','pageview');
+    }
+  </script>
+
+</body>
+</html>
+

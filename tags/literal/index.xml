@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Literal on blog.import.re</title>
+    <link>http://blog.import.re/tags/literal/</link>
+    <description>Recent content in Literal on blog.import.re</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Thu, 24 Dec 2015 20:33:15 +0900</lastBuildDate>
+    <atom:link href="http://blog.import.re/tags/literal/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Function Literals with Receiver</title>
+      <link>http://blog.import.re/post/kotlin-function-literals-with-receiver/</link>
+      <pubDate>Thu, 24 Dec 2015 20:33:15 +0900</pubDate>
+      
+      <guid>http://blog.import.re/post/kotlin-function-literals-with-receiver/</guid>
+      <description>
+
+&lt;p&gt;코틀린에서는 리시버 객체와 함께 함수 리터럴을 호출할 수 있는 기능을 제공합니다.&lt;br /&gt;
+함수 리터럴 안에서는 리시버의 메소드와 변수를 바로 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;이해를 돕기위해 &lt;a href=&#34;http://blog.import.re/post/kotlin-let-apply-run-with-use/&#34;&gt;이전 포스트&lt;/a&gt;에서 살펴보았던 &lt;code&gt;run&lt;/code&gt;과 함께 아래와 같은 상황을 가정해 보겠습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;안드로이드에서 CurrentActivity의 CurrentFragment에서 AnotherActivity를 호출할 때&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;class CurrentFragment : Fragment() {
+    // ...
+    private fun startAnotherActivity() {
+        // 이전 포스트에서 살펴보았던 `run`
+        activity?.run {
+            val intent = Intent(this, AnotherActivity::class.java)
+
+            // CurrentFragment가 Attach된 Activity의
+            // `startActivity`와 `finish`를 호출합니다.
+            startActivity(intent)
+            finish()
+        }
+    }
+    // ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;이전 포스트에서 설명했던 &lt;code&gt;run&lt;/code&gt;의 원형을 다시 살펴보면 아래와 같은데,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;public inline fun &amp;lt;T, R&amp;gt; T.run(f: T.() -&amp;gt; R): R = f()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;위의 예에서 &lt;code&gt;run&lt;/code&gt;에 넘기는 함수 리터럴의 타입은 바로 &lt;code&gt;T.() -&amp;gt; R&lt;/code&gt;,
+다시 말하면 &lt;code&gt;CurrentActivity.() -&amp;gt; Unit&lt;/code&gt;을 의미합니다.&lt;/p&gt;
+
+&lt;h2 id=&#34;활용:6f1445bf94306a2c12bbb8cd5f44ca54&#34;&gt;활용&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Function Literals with Receiver&lt;/strong&gt;를 활용한 대표적인 예로는
+&lt;a href=&#34;https://kotlinlang.org/docs/reference/type-safe-builders.html&#34;&gt;Type Safe Builder&lt;/a&gt;가 있습니다.&lt;br /&gt;
+또한 &lt;a href=&#34;https://github.com/Kotlin/anko&#34;&gt;Anko&lt;/a&gt; 역시 이를 활용한 JetBrains의 안드로이드 라이브러리로,
+xml 대신에 DSL로 UI를 그릴 수 있도록 도와줍니다.&lt;/p&gt;
+
+&lt;p&gt;아래의 예를 보면 &lt;strong&gt;Function Literals with Receiver&lt;/strong&gt;를 활용한 느낌이 날 것입니다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    verticalLayout {
+        padding = dip(30)
+        editText {
+            hint = &amp;quot;Name&amp;quot;
+            textSize = 24f
+        }
+        editText {
+            hint = &amp;quot;Password&amp;quot;
+            textSize = 24f
+        }
+        button(&amp;quot;Login&amp;quot;) {
+            textSize = 26f
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;정리:6f1445bf94306a2c12bbb8cd5f44ca54&#34;&gt;정리&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;이를 이용한 또 다른 활용방안 생각해보기&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

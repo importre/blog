@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="http://blog.import.re/post/kotlin-function-literals-with-receiver/">
+  <link href="" rel="alternate" type="application/rss+xml" title="blog.import.re"/>
+
+  <title>Function Literals with Receiver</title>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/github.css">
+  <link rel="stylesheet" href="/css/heobot.css">
+
+  <meta property="og:url"              content="http://blog.import.re/post/kotlin-function-literals-with-receiver/" />
+  <meta property="og:type"             content="blog" />
+  <meta property="og:title"            content="Function Literals with Receiver" />
+  <meta property="twitter:title"       content="Function Literals with Receiver" />
+
+  <meta property="og:site_name"        content="blog.import.re" />
+  <meta property="twitter:site"        content="blog.import.re" />
+
+  
+  <meta property="og:image"            content="http://blog.import.re/images/importre.jpg" />
+  <meta property="twitter:image"       content="http://blog.import.re/images/importre.jpg" />
+  
+
+  <meta property="fb:app_id"           content="1706988242848832">
+  <meta property="og:image:height"     content="200">
+  <meta property="og:image:width"      content="200">
+  <meta property="og:image"            content="http://blog.import.re/images/brand.png"/>
+  <meta property="twitter:image"       content="http://blog.import.re/images/brand.png" />
+  <meta property="twitter:creator"     content="Jaewe Heo" />
+
+  
+  <meta property="og:description"      content="코틀린에서는 리시버 객체와 함께 함수 리터럴을 호출할 수 있는 기능을 제공합니다.
+함수 리터럴 안에서는 리시버의 메소드와 변수를 바로 사용할 수 있습니다.
+" />
+  <meta property="twitter:description" content="코틀린에서는 리시버 객체와 함께 함수 리터럴을 호출할 수 있는 기능을 제공합니다.
+함수 리터럴 안에서는 리시버의 메소드와 변수를 바로 사용할 수 있습니다.
+" />
+  
+
+</head>
+
+<body>
+
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1706988242848832";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          blog.import.re
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/post">Archives</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+
+<h1>Function Literals with Receiver</h1>
+<hr/>
+
+<div class="contents">
+  <div>
+  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+  December 24, 2015
+  &nbsp;
+  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+  
+  Jaewe Heo
+  
+
+  
+</div>
+<br />
+
+  
+
+<p>코틀린에서는 리시버 객체와 함께 함수 리터럴을 호출할 수 있는 기능을 제공합니다.<br />
+함수 리터럴 안에서는 리시버의 메소드와 변수를 바로 사용할 수 있습니다.</p>
+
+<p>이해를 돕기위해 <a href="/post/kotlin-let-apply-run-with-use/">이전 포스트</a>에서 살펴보았던 <code>run</code>과 함께 아래와 같은 상황을 가정해 보겠습니다.</p>
+
+<blockquote>
+<p>안드로이드에서 CurrentActivity의 CurrentFragment에서 AnotherActivity를 호출할 때</p>
+</blockquote>
+
+<pre><code class="language-kotlin">class CurrentFragment : Fragment() {
+    // ...
+    private fun startAnotherActivity() {
+        // 이전 포스트에서 살펴보았던 `run`
+        activity?.run {
+            val intent = Intent(this, AnotherActivity::class.java)
+
+            // CurrentFragment가 Attach된 Activity의
+            // `startActivity`와 `finish`를 호출합니다.
+            startActivity(intent)
+            finish()
+        }
+    }
+    // ...
+}
+</code></pre>
+
+<p>이전 포스트에서 설명했던 <code>run</code>의 원형을 다시 살펴보면 아래와 같은데,</p>
+
+<pre><code class="language-kotlin">public inline fun &lt;T, R&gt; T.run(f: T.() -&gt; R): R = f()
+</code></pre>
+
+<p>위의 예에서 <code>run</code>에 넘기는 함수 리터럴의 타입은 바로 <code>T.() -&gt; R</code>,
+다시 말하면 <code>CurrentActivity.() -&gt; Unit</code>을 의미합니다.</p>
+
+<h2 id="활용:6f1445bf94306a2c12bbb8cd5f44ca54">활용</h2>
+
+<p><strong>Function Literals with Receiver</strong>를 활용한 대표적인 예로는
+<a href="https://kotlinlang.org/docs/reference/type-safe-builders.html">Type Safe Builder</a>가 있습니다.<br />
+또한 <a href="https://github.com/Kotlin/anko">Anko</a> 역시 이를 활용한 JetBrains의 안드로이드 라이브러리로,
+xml 대신에 DSL로 UI를 그릴 수 있도록 도와줍니다.</p>
+
+<p>아래의 예를 보면 <strong>Function Literals with Receiver</strong>를 활용한 느낌이 날 것입니다.</p>
+
+<pre><code class="language-kotlin">override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    verticalLayout {
+        padding = dip(30)
+        editText {
+            hint = &quot;Name&quot;
+            textSize = 24f
+        }
+        editText {
+            hint = &quot;Password&quot;
+            textSize = 24f
+        }
+        button(&quot;Login&quot;) {
+            textSize = 26f
+        }
+    }
+}
+</code></pre>
+
+<h2 id="정리:6f1445bf94306a2c12bbb8cd5f44ca54">정리</h2>
+
+<ul>
+<li>이를 이용한 또 다른 활용방안 생각해보기</li>
+</ul>
+
+</div>
+
+<br/>
+<hr/>
+
+
+<div>
+  
+  <span class="label label-primary">
+    <a href="/tags/function" style="color: white;">function</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/literal" style="color: white;">literal</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/receiver" style="color: white;">receiver</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/anko" style="color: white;">anko</a>
+  </span>
+  &nbsp;
+  
+</div>
+
+
+<div class="like">
+  <div class="fb-like " data-href="http://blog.import.re/post/kotlin-function-literals-with-receiver/" data-layout="button"
+       data-action="like" data-show-faces="true" data-share="true"></div>
+</div>
+
+<hr/>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'blogimportre';
+    var disqus_identifier = 'http:\/\/blog.import.re\/post\/kotlin-function-literals-with-receiver\/';
+    var disqus_title = 'Function Literals with Receiver';
+    var disqus_url = 'http:\/\/blog.import.re\/post\/kotlin-function-literals-with-receiver\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+<footer class="footer">
+  <small>
+    Code licensed under the <a href="https://github.com/importre/blog/blob/master/license">MIT License</a>
+    and the docs are licensed under
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+  </small>
+</footer>
+
+
+  <script>
+    if (window.location.hostname != "localhost") {
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create', "UA-64739906-2");ga('send','pageview');
+    }
+  </script>
+
+</body>
+</html>
+
