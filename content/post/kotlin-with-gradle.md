@@ -4,7 +4,7 @@ categories: [kotlin]
 date: 2015-12-21T17:59:55+09:00
 homepage: ""
 tags: [gradle, JvmName, "@file"]
-title: kotlin with gradle
+title: Kotlin with Gradle
 ---
 
 Gradle과 함께 코틀린을 시작하는 방법을 설명합니다.
