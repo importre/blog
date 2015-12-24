@@ -57,3 +57,7 @@ blockquote {
   margin-left: 10px;
   color: #787878;
 }
+
+.tag {
+  margin: 1px;
+}
