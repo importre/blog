@@ -74,8 +74,6 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 - 이를 이용한 또 다른 활용방안 생각해보기
 
-끝.
-
 
 
 [anko]: https://github.com/Kotlin/anko

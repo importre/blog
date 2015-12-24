@@ -170,8 +170,6 @@ PrintWriter(FileOutputStream("output.txt")).use {
 
 - 몰라도 되는 것이지만 알면 꿀!
 
-끝.
-
 
 
 
