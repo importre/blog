@@ -176,5 +176,5 @@ PrintWriter(FileOutputStream("output.txt")).use {
 
 [extensions]: https://goo.gl/EN6bTs
 [use-code]: https://goo.gl/nHreuO
-[fun-liternal-receiver1]: {{< relref "kotlin-let-apply-run-with-use.md" >}}
+[fun-liternal-receiver1]: {{< relref "kotlin-function-literals-with-receiver.md" >}}
 [fun-liternal-receiver2]: https://goo.gl/yo7b85
