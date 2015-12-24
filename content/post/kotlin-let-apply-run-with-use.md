@@ -150,7 +150,7 @@ public inline fun <T : Closeable, R> T.use(block: (T) -> R): R { ...... }
 `Closeable` 인터페이스가 구현된 클래스에 한해 `use`를 사용하실 수 있습니다.
 [내부 구현][use-code]을 보면 `Exception`이 발생하거나 말거나 항상 `close()`를 호출을 보장합니다.
 
-> [내부 구현][use-code]의 TODO 주석을 보니 패키지도 바뀌고 `using`으로 바뀌려나 봅니다.
+> 내부 구현의 TODO 주석을 보니 패키지도 바뀌고 함수 이름도 `using`으로 바뀌려나 봅니다.
 
 ### 예제
 ```kotlin
