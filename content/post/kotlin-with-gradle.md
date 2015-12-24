@@ -9,6 +9,8 @@ title: Kotlin with Gradle
 
 Gradle과 함께 코틀린을 시작하는 방법을 설명합니다.
 
+<!--more-->
+
 ## 프로젝트 폴더 초기화
 
 아래와 같은 명령을 통해 프로젝트 폴더(여기서는 `playkotlin`)를 초기화를 합니다.

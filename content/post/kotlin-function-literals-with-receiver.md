@@ -9,6 +9,8 @@ title: Function Literals with Receiver
 코틀린에서는 리시버 객체와 함께 함수 리터럴을 호출할 수 있는 기능을 제공합니다.
 함수 리터럴 안에서는 리시버의 메소드와 변수를 바로 사용할 수 있습니다.
 
+<!--more-->
+
 이해를 돕기위해 [이전 포스트][prev]에서 살펴보았던 `run`과 함께 아래와 같은 상황을 가정해 보겠습니다.
 
 > 안드로이드에서 CurrentActivity의 CurrentFragment에서 AnotherActivity를 호출할 때
