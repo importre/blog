@@ -3,16 +3,17 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-    "jquery": "^2.1.4",
-    "bootstrap": "^3.3.4",
-    "highlight.js": "^8.6.0"
-  },
   "devDependencies": {
+    "bootstrap": "^3.3.6",
+    "browserify": "^12.0.1",
     "delete": "^0.1.5",
+    "font-awesome": "^4.5.0",
     "gulp": "^3.9.0",
     "gulp-gh-pages": "^0.5.2",
-    "gulp-shell": "^0.4.2"
+    "gulp-shell": "^0.4.2",
+    "highlight.js": "^9.0.0",
+    "jquery": "^2.1.4",
+    "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
