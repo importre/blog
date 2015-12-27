@@ -32,7 +32,7 @@ gulp.task('dep', ['clean'], function () {
       .pipe(gulp.dest('static/js'));
 });
 
-gulp.task('build', ['dep'], shell.task([
+gulp.task('build', ['clean'], shell.task([
   'hugo'
 ]));
 
@@ -41,6 +41,6 @@ gulp.task('deploy', ['build'], function () {
   return gulp.src('./public/**/*').pipe(ghPages());
 });
 
-gulp.task('watch', ['dep'], shell.task([
+gulp.task('watch', ['clean'], shell.task([
   'hugo server --watch --verbose'
 ]));
