@@ -42,8 +42,10 @@
   <meta property="twitter:creator"     content="Jaewe Heo" />
 
   
-  <meta property="og:description"      content="애플리케이션을 만들다보면 모델에 해당하는 클래스를 만들게 될 것입니다. 그러한 클래스들은 일반적으로 딱히 뭐 하는 것도 없고 데이터만 들고 있게되죠. 코톨린에서는 그러한 클래스를 특별히 정의할 수 있고, 그로인해 득되는 것들이 몇가지 있습니다. 데이터 클래스 선언 데이터 클래스를 선언하는 방법은 data를 class 선언하기 전에 써주면 됩니다. 간단하죠? data class User(val name: String, val age: Int) 제약사항 단, 몇가지 제약사항이 있습니다. 반드시 primary constructor가 필요함 1개 이상의 파라미터가 반드시 존재해야 하고, 모든 파라미터는 val/var로 정의해야 함 참고로 primary constructor란 클래스 헤더에 존재하고, 클래스 이름 뒤에 정의하는 생성자를 의미함 abstract, open, sealed or inner 클래스가 아니어야 함 interface를 확장하는 것 외에 다른 클래를 확장 불가 보다 자세한 조건과 이러한 제한이 생긴 이유는 이 글을 참고하세요." />
-  <meta property="twitter:description" content="애플리케이션을 만들다보면 모델에 해당하는 클래스를 만들게 될 것입니다. 그러한 클래스들은 일반적으로 딱히 뭐 하는 것도 없고 데이터만 들고 있게되죠. 코톨린에서는 그러한 클래스를 특별히 정의할 수 있고, 그로인해 득되는 것들이 몇가지 있습니다. 데이터 클래스 선언 데이터 클래스를 선언하는 방법은 data를 class 선언하기 전에 써주면 됩니다. 간단하죠? data class User(val name: String, val age: Int) 제약사항 단, 몇가지 제약사항이 있습니다. 반드시 primary constructor가 필요함 1개 이상의 파라미터가 반드시 존재해야 하고, 모든 파라미터는 val/var로 정의해야 함 참고로 primary constructor란 클래스 헤더에 존재하고, 클래스 이름 뒤에 정의하는 생성자를 의미함 abstract, open, sealed or inner 클래스가 아니어야 함 interface를 확장하는 것 외에 다른 클래를 확장 불가 보다 자세한 조건과 이러한 제한이 생긴 이유는 이 글을 참고하세요." />
+  <meta property="og:description"      content="코틀린의 data 클래스와 equals 사용시 주의할 점에 대해 살펴보고, RxJava와 함께 활용할 수 있는 방안에 대해 생각해봅니다.
+" />
+  <meta property="twitter:description" content="코틀린의 data 클래스와 equals 사용시 주의할 점에 대해 살펴보고, RxJava와 함께 활용할 수 있는 방안에 대해 생각해봅니다.
+" />
   
 
 </head>
@@ -109,6 +111,8 @@
 <br />
 
   
+
+<p>코틀린의 data 클래스와 equals 사용시 주의할 점에 대해 살펴보고, RxJava와 함께 활용할 수 있는 방안에 대해 생각해봅니다.</p>
 
 <p>애플리케이션을 만들다보면 모델에 해당하는 클래스를 만들게 될 것입니다.
 그러한 클래스들은 일반적으로 딱히 뭐 하는 것도 없고 데이터만 들고 있게되죠.</p>
