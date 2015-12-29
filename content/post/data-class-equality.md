@@ -4,8 +4,11 @@ date: 2015-12-29T20:22:53+09:00
 draft: false
 tags: [data, equality, array, equals, collection, rx]
 title: Data class and Equality
-description: 코틀린의 data 클래스와 equals 사용시 주의할 점에 대해 살펴보고, RxJava와 함께 활용할 수 있는 방안에 대해 생각해봅니다.
 ---
+
+코틀린의 data 클래스와 equals 사용시 주의할 점에 대해 살펴보고, RxJava와 함께 활용할 수 있는 방안에 대해 생각해봅니다.
+
+<!--more-->
 
 애플리케이션을 만들다보면 모델에 해당하는 클래스를 만들게 될 것입니다.
 그러한 클래스들은 일반적으로 딱히 뭐 하는 것도 없고 데이터만 들고 있게되죠.
