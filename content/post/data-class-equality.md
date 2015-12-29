@@ -42,9 +42,10 @@ data class User(val name: String, val age: Int)
     - [destructing]할 때 사용할 수 있음
 - `copy()` 생성
 
-> 제목이 `Data class and Equality`인 이유는
+> 글 제목이 `Data class and Equality`인 이유는
 > `equals` 함수를 사용할 때 조심해야할 부분이 있기 때문입니다.  
-> `Equality`로 넘어가봅시다.
+
+`Equality`로 넘어가봅시다.
 
 
 ## Equality
