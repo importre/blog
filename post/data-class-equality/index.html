@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="http://blog.import.re/post/data-class-equality/">
+  <link href="" rel="alternate" type="application/rss+xml" title="blog.import.re"/>
+
+  <title>Data class and Equality</title>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/github.css">
+  <link rel="stylesheet" href="/css/heobot.css">
+
+  <meta property="og:url"              content="http://blog.import.re/post/data-class-equality/" />
+  <meta property="og:type"             content="blog" />
+  <meta property="og:title"            content="Data class and Equality" />
+  <meta property="twitter:title"       content="Data class and Equality" />
+
+  <meta property="og:site_name"        content="blog.import.re" />
+  <meta property="twitter:site"        content="blog.import.re" />
+
+  
+  <meta property="og:image"            content="http://blog.import.re/images/importre.jpg" />
+  <meta property="twitter:image"       content="http://blog.import.re/images/importre.jpg" />
+  
+
+  <meta property="fb:app_id"           content="1706988242848832">
+  <meta property="og:image:height"     content="200">
+  <meta property="og:image:width"      content="200">
+  <meta property="og:image"            content="http://blog.import.re/images/brand.png"/>
+  <meta property="twitter:image"       content="http://blog.import.re/images/brand.png" />
+  <meta property="twitter:creator"     content="Jaewe Heo" />
+
+  
+  <meta property="og:description"      content="애플리케이션을 만들다보면 모델에 해당하는 클래스를 만들게 될 것입니다. 그러한 클래스들은 일반적으로 딱히 뭐 하는 것도 없고 데이터만 들고 있게되죠. 코톨린에서는 그러한 클래스를 특별히 정의할 수 있고, 그로인해 득되는 것들이 몇가지 있습니다. 데이터 클래스 선언 데이터 클래스를 선언하는 방법은 data를 class 선언하기 전에 써주면 됩니다. 간단하죠? data class User(val name: String, val age: Int) 제약사항 단, 몇가지 제약사항이 있습니다. 반드시 primary constructor가 필요함 1개 이상의 파라미터가 반드시 존재해야 하고, 모든 파라미터는 val/var로 정의해야 함 참고로 primary constructor란 클래스 헤더에 존재하고, 클래스 이름 뒤에 정의하는 생성자를 의미함 abstract, open, sealed or inner 클래스가 아니어야 함 interface를 확장하는 것 외에 다른 클래를 확장 불가 보다 자세한 조건과 이러한 제한이 생긴 이유는 이 글을 참고하세요." />
+  <meta property="twitter:description" content="애플리케이션을 만들다보면 모델에 해당하는 클래스를 만들게 될 것입니다. 그러한 클래스들은 일반적으로 딱히 뭐 하는 것도 없고 데이터만 들고 있게되죠. 코톨린에서는 그러한 클래스를 특별히 정의할 수 있고, 그로인해 득되는 것들이 몇가지 있습니다. 데이터 클래스 선언 데이터 클래스를 선언하는 방법은 data를 class 선언하기 전에 써주면 됩니다. 간단하죠? data class User(val name: String, val age: Int) 제약사항 단, 몇가지 제약사항이 있습니다. 반드시 primary constructor가 필요함 1개 이상의 파라미터가 반드시 존재해야 하고, 모든 파라미터는 val/var로 정의해야 함 참고로 primary constructor란 클래스 헤더에 존재하고, 클래스 이름 뒤에 정의하는 생성자를 의미함 abstract, open, sealed or inner 클래스가 아니어야 함 interface를 확장하는 것 외에 다른 클래를 확장 불가 보다 자세한 조건과 이러한 제한이 생긴 이유는 이 글을 참고하세요." />
+  
+
+</head>
+
+<body>
+
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1706988242848832";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          blog.import.re
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/post">Archives</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+
+<h1>Data class and Equality</h1>
+<hr/>
+
+<div class="contents">
+  <div>
+  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+  December 29, 2015
+  &nbsp;
+  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+  
+  Jaewe Heo
+  
+
+  
+</div>
+<br />
+
+  
+
+<p>애플리케이션을 만들다보면 모델에 해당하는 클래스를 만들게 될 것입니다.
+그러한 클래스들은 일반적으로 딱히 뭐 하는 것도 없고 데이터만 들고 있게되죠.</p>
+
+<p>코톨린에서는 그러한 클래스를 특별히 정의할 수 있고, 그로인해 득되는 것들이 몇가지 있습니다.</p>
+
+<h2 id="데이터-클래스:6d2a11c56fb0c917b8b8fcfbc8e39cac">데이터 클래스</h2>
+
+<h3 id="선언:6d2a11c56fb0c917b8b8fcfbc8e39cac">선언</h3>
+
+<p>데이터 클래스를 선언하는 방법은 <code>data</code>를 <code>class</code> 선언하기 전에 써주면 됩니다. 간단하죠?</p>
+
+<pre><code class="language-kotlin">data class User(val name: String, val age: Int)
+</code></pre>
+
+<h3 id="제약사항:6d2a11c56fb0c917b8b8fcfbc8e39cac">제약사항</h3>
+
+<p>단, 몇가지 제약사항이 있습니다.</p>
+
+<ul>
+<li>반드시 <code>primary constructor</code>가 필요함
+
+<ul>
+<li>1개 이상의 파라미터가 반드시 존재해야 하고, 모든 파라미터는 <code>val</code>/<code>var</code>로 정의해야 함</li>
+<li>참고로 <a href="https://kotlinlang.org/docs/reference/classes.html#constructors">primary constructor</a>란 클래스 헤더에 존재하고, 클래스 이름 뒤에 정의하는 생성자를 의미함</li>
+</ul></li>
+<li><code>abstract</code>, <code>open</code>, <code>sealed</code> or <code>inner</code> 클래스가 아니어야 함</li>
+<li><code>interface</code>를 확장하는 것 외에 다른 클래를 확장 불가</li>
+</ul>
+
+<p>보다 자세한 조건과 이러한 제한이 생긴 이유는 <a href="http://goo.gl/L0QVRb">이 글</a>을 참고하세요.</p>
+
+<h3 id="얻는-효과:6d2a11c56fb0c917b8b8fcfbc8e39cac">얻는 효과</h3>
+
+<p><code>data</code>를 선언함과 동시에 코틀린 컴파일러는 고맙게도 아래와 같은 일을 자동으로 해줍니다.</p>
+
+<ul>
+<li><code>equals()</code>/<code>hashCode()</code> 쌍으로 생성</li>
+<li><code>toString()</code> 생성 (<code>primary constructor</code>에 선언된 프로퍼티들을 예쁘게 보여줌)</li>
+<li>선언된 프로퍼티에 상응하는 <code>componentN()</code> 함수들 생성
+
+<ul>
+<li><a href="https://kotlinlang.org/docs/reference/multi-declarations.html">destructing</a>할 때 사용할 수 있음</li>
+</ul></li>
+<li><code>copy()</code> 생성</li>
+</ul>
+
+<blockquote>
+<p>글 제목이 <code>Data class and Equality</code>인 이유는
+<code>equals</code> 함수를 사용할 때 조심해야할 부분이 있기 때문입니다.</p>
+</blockquote>
+
+<p><code>Equality</code>로 넘어가봅시다.</p>
+
+<h2 id="equality:6d2a11c56fb0c917b8b8fcfbc8e39cac">Equality</h2>
+
+<p>코틀린에서는 동등 비교를 할 때 2가지 타입이 있습니다.</p>
+
+<ul>
+<li>같은 레퍼런스인지 (동일한 객체를 가리키는지)
+
+<ul>
+<li><code>==</code> 연산자가 아닌 <code>===</code> 연산자로 비교합니다.</li>
+</ul></li>
+<li>구조적으로 같은 형태인지
+
+<ul>
+<li><code>==</code> 연산자가 <code>equals</code>와 동일하게 동작합니다.</li>
+</ul></li>
+</ul>
+
+<p>그럼 <code>data</code> 클래스인 경우와 그렇지 않은 경우에 동등 비교의 결과를 여러가지 예제를 통해 살펴봅시다.<br />
+참고로 아래 나오는 예제는 모두 테스트 케이스를 통과한 <a href="https://goo.gl/suX3uZ">코드</a>입니다.</p>
+
+<blockquote>
+<p>kotlin 1.0 beta 4 이후로는 test와 관련된 의존성을 따로 추가해야 사용이 가능합니다. <a href="https://goo.gl/7I8dKf">[참고]</a></p>
+</blockquote>
+
+<h3 id="user:6d2a11c56fb0c917b8b8fcfbc8e39cac">User</h3>
+
+<p><code>name</code>을 가지는 <code>User</code>클래스를 <strong><code>data</code>인 것</strong>과 <strong>그렇지 아니한 것</strong>으로 테스트를 해보았습니다.</p>
+
+<pre><code class="language-kotlin">class User(val name: String)
+data class UserData(val name: String)
+
+@Test
+fun testUser() {
+    val u1 = User(&quot;heo&quot;)
+    val u2 = User(&quot;heo&quot;)
+    assertNotEquals(u1, u2)   // 데이터 클래스가 아닌 경우는 다름
+}
+
+@Test
+fun testUserData() {
+    val u1 = UserData(&quot;heo&quot;)
+    val u2 = UserData(&quot;heo&quot;)
+    assertEquals(u1, u2)      // 데이터 클래스인 경우는 같음
+}
+</code></pre>
+
+<h3 id="user-with-list:6d2a11c56fb0c917b8b8fcfbc8e39cac">User with List</h3>
+
+<p>그럼 <code>emails</code>라는 <code>Collection</code>(여기서는 <code>List</code>)을 가진 <code>User</code> 클래스라면 어떻게 될까요?</p>
+
+<pre><code class="language-kotlin">class UserWithList(val name: String, val emails: List&lt;String&gt;)
+data class UserDataWithList(val name: String, val emails: List&lt;String&gt;)
+
+@Test
+fun testList() {
+    // list
+    assertEquals(listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;), 
+            listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;))
+    // nested list
+    assertEquals(listOf(listOf(&quot;a@b.com&quot;), listOf(&quot;c@d.com&quot;)),
+            listOf(listOf(&quot;a@b.com&quot;), listOf(&quot;c@d.com&quot;)))
+}
+
+@Test
+fun testUserWithList() {
+    val u1 = UserWithList(&quot;heo&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;))
+    val u2 = UserWithList(&quot;heo&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;))
+    assertNotEquals(u1, u2)
+}
+
+@Test
+fun testUserDataWithList() {
+    val u1 = UserDataWithList(&quot;heo&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;))
+    val u2 = UserDataWithList(&quot;heo&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;))
+    assertEquals(u1, u2)
+}
+</code></pre>
+
+<p>결과는 예상했던 바와 같이 <code>data</code>로 선언하면 구조적으로 같은 경우에는 동등함을 알 수 있습니다.</p>
+
+<blockquote>
+<p>리스트가 중첩된 경우도 구조만 같다면 동등하다는 것을 알 수 있습니다.</p>
+</blockquote>
+
+<h3 id="user-with-map:6d2a11c56fb0c917b8b8fcfbc8e39cac">User with Map</h3>
+
+<p><code>Map</code>은 어떨까요?</p>
+
+<pre><code class="language-kotlin">class UserWithMap(val name: String, val emails: Map&lt;Int, String&gt;)
+data class UserDataWithMap(val name: String, val emails: Map&lt;Int, String&gt;)
+
+@Test
+fun testUserWithMap() {
+    val u1 = UserWithMap(&quot;heo&quot;, mapOf(0 to &quot;a@b.com&quot;, 1 to &quot;c@d.com&quot;))
+    val u2 = UserWithMap(&quot;heo&quot;, mapOf(0 to &quot;a@b.com&quot;, 1 to &quot;c@d.com&quot;))
+    assertNotEquals(u1, u2)
+}
+
+@Test
+fun testUserDataWithMap() {
+    val u1 = UserDataWithMap(&quot;heo&quot;, mapOf(0 to &quot;a@b.com&quot;, 1 to &quot;c@d.com&quot;))
+    val u2 = UserDataWithMap(&quot;heo&quot;, mapOf(1 to &quot;c@d.com&quot;, 0 to &quot;a@b.com&quot;))
+    assertEquals(u1, u2)
+}
+</code></pre>
+
+<p><code>Map</code> 역시 마찬가지입니다.</p>
+
+<p><code>List</code>, <code>Map</code> 등과 같은 <code>Collection</code>들은 구조적으로 비교하기 때문에
+<code>data</code> 클래스로 선언된 경우에는 동등하다고 알려줍니다.</p>
+
+<h3 id="user-with-array:6d2a11c56fb0c917b8b8fcfbc8e39cac">User with Array</h3>
+
+<p>그렇다면 <code>Array</code>는 어떨까요?</p>
+
+<pre><code class="language-kotlin">class UserWithArray(val name: String, val emails: Array&lt;String&gt;)
+data class UserDataWithArray(val name: String, val emails: Array&lt;String&gt;)
+
+@Test
+fun testUserWithArray() {
+    val a1= arrayOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;)
+    val a2= arrayOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;)
+    assertNotEquals(a1, a2)
+    
+    val u1 = UserWithArray(&quot;heo&quot;, a1)
+    val u2 = UserWithArray(&quot;heo&quot;, a2)
+    assertNotEquals(u1, u2)
+}
+
+@Test
+fun testUserDataWithArray() {
+    val u1 = UserDataWithArray(&quot;heo&quot;, arrayOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;))
+    val u2 = UserDataWithArray(&quot;heo&quot;, arrayOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;))
+    assertNotEquals(u1, u2) // data 클래스이지만 Not Equals
+}
+</code></pre>
+
+<p><code>Array</code>는 <code>data</code>로 선언해도 같다고 하질 않습니다!!!</p>
+
+<h4 id="코틀린에서-array-는-항상-레퍼런스를-비교합니다:6d2a11c56fb0c917b8b8fcfbc8e39cac">코틀린에서 <code>Array</code>는 항상 레퍼런스를 비교합니다.</h4>
+
+<ul>
+<li>콤포넌트로 선언된 배열은 구조적으로 비교하는데</li>
+<li>중첩된 구조에서 하위 배열은 <code>equals</code>로 비교하게되고,</li>
+<li><code>Any</code>나 <code>T</code>로 선언된 경우에는 런타임에 비교하기 때문에 모순되는 상황이 발생합니다.</li>
+</ul>
+
+<p>그래서 다 필요 없고 그냥 레퍼런스만 비교합니다.
+보다 자세한 사항은 <a href="http://goo.gl/L0QVRb">이 글</a>의 아래쪽을 살펴보세요.</p>
+
+<h2 id="응용하기:6d2a11c56fb0c917b8b8fcfbc8e39cac">응용하기</h2>
+
+<p><a href="https://github.com/square/retrofit">retrofit</a>과 <a href="https://github.com/ReactiveX/RxJava">RxJava</a>를 함께 사용할 때, retrofit의 응답으로 넘어오는 데이터의 정의를
+<code>data</code>로 사용하면 좋습니다.</p>
+
+<p>사실 굳이 <code>data</code>로 선언하지 않아도 되긴 하지만,
+아래와 같은 시나리오에서는 아주 유용하게 사용할 수 있습니다.</p>
+
+<p>시나리오는 아주 간단합니다.</p>
+
+<blockquote>
+<p>retrofit으로 서버에 데이터를 요청하고, 응답으로 온 결과를 화면에 보여줘야 한다.<br />
+이 때, 사용자가 화면을 새로고침을 실행했다.
+하지만 결과가 같아서 굳이 여러번 화면을 갱신할 필요가 없다면&hellip;</p>
+</blockquote>
+
+<p><a href="https://github.com/ReactiveX/RxJava">RxJava</a>의 <code>Observable</code>을 사용할 때 <a href="http://reactivex.io/documentation/operators/replay.html">replay(cache)</a>와
+<a href="http://reactivex.io/documentation/operators/distinct.html">distinct 또는 distinctUntilChanged</a>를 이용하면 훌륭하게 처리할 수 있습니다.</p>
+
+<p>아시다시피 <code>cache</code>를 사용하게 되면
+이전에 요청했던 결과는 <code>subscribe</code>하는 즉시 <code>onNext</code>로 넘어오게 되는데,
+새로고침을 하더라도 <code>distinct</code>에 의해 <code>onNext</code>가 두 번 호출되는 것을 막을 수 있습니다.<br />
+따라서, 화면 갱신하는 부분을 자연스럽게 한 번만 호출 할 수 있게 됩니다.<br />
+아주 좋지요?</p>
+
+<h3 id="test-with-rx:6d2a11c56fb0c917b8b8fcfbc8e39cac">Test with Rx</h3>
+
+<p><code>cache</code>는 이 글에서 논 외로 치고, <code>equals</code>에 초첨을 맞춘 예제입니다.</p>
+
+<p><code>distinctUntilChanged</code> 오퍼레이터에 의해
+이전에 방출된 데이터가 다를 때에만 <code>onNext</code>가 호출되는 것을 확인하실 수 있습니다.</p>
+
+<pre><code class="language-kotlin">@Test
+fun testWithRx() {
+    val users = arrayOf(
+            UserDataWithList(&quot;heo&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;)),
+            UserDataWithList(&quot;heo&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;)),
+            UserDataWithList(&quot;kim&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;)),
+            UserDataWithList(&quot;heo&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;)),
+            UserDataWithList(&quot;heo&quot;, listOf(&quot;a@b.com&quot;, &quot;c@d.com&quot;))
+    )
+
+    val count = CountDownLatch(users.size)
+    Observable.from(users)
+            .distinctUntilChanged()
+            .observeOn(Schedulers.newThread())
+            .subscribe {
+                count.countDown()
+                println(it)
+            }
+
+    count.await(1, TimeUnit.SECONDS)
+    assertEquals(2, count.count) // 2개가 남아야 함
+}
+</code></pre>
+
+<p>위의 결과는 아래와 같습니다.</p>
+
+<pre><code>UserDataWithList(name=heo, emails=[a@b.com, c@d.com])
+UserDataWithList(name=kim, emails=[a@b.com, c@d.com])
+UserDataWithList(name=heo, emails=[a@b.com, c@d.com])
+</code></pre>
+
+<h2 id="정리:6d2a11c56fb0c917b8b8fcfbc8e39cac">정리</h2>
+
+<p><code>data</code>클래스와 <code>equality</code>에 대해 살펴보았습니다.<br />
+일단은 <code>data</code>클래스에서 <code>Array</code>를 사용하면
+<strong>동등비교가 되지 않음</strong>에 유의하면 될 것 같습니다(스펙이 바뀌는지도 잘 살펴봐야 할 듯 하네요).</p>
+
+<p><a href="https://github.com/ReactiveX/RxJava">RxJava</a>의 오퍼레이터 중에서 <code>equals</code>를 사용하는 경우,
+<code>data</code>클래스와 함께 아주 유용하게 사용할 수 있습니다.</p>
+
+</div>
+
+<br/>
+<hr/>
+
+
+<div>
+  
+  <span class="label label-primary">
+    <a href="/tags/data" style="color: white;">data</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/equality" style="color: white;">equality</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/array" style="color: white;">array</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/equals" style="color: white;">equals</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/collection" style="color: white;">collection</a>
+  </span>
+  &nbsp;
+  
+  <span class="label label-primary">
+    <a href="/tags/rx" style="color: white;">rx</a>
+  </span>
+  &nbsp;
+  
+</div>
+
+
+<div class="like">
+  <div class="fb-like " data-href="http://blog.import.re/post/data-class-equality/" data-layout="button_count"
+       data-action="like" data-show-faces="true" data-share="true"></div>
+</div>
+
+<hr/>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'blogimportre';
+    var disqus_identifier = 'http:\/\/blog.import.re\/post\/data-class-equality\/';
+    var disqus_title = 'Data class and Equality';
+    var disqus_url = 'http:\/\/blog.import.re\/post\/data-class-equality\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+<footer class="footer">
+  <small>
+    Code licensed under the <a href="https://github.com/importre/blog/blob/master/license">MIT License</a>
+    and the docs are licensed under
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+  </small>
+</footer>
+
+
+  <script>
+    if (window.location.hostname != "localhost") {
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create', "UA-64739906-2");ga('send','pageview');
+    }
+  </script>
+
+</body>
+</html>
+

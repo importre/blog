@@ -6,8 +6,293 @@
     <description>Recent content in Posts on blog.import.re</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Thu, 24 Dec 2015 20:33:15 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 29 Dec 2015 20:22:53 +0900</lastBuildDate>
     <atom:link href="http://blog.import.re/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Data class and Equality</title>
+      <link>http://blog.import.re/post/data-class-equality/</link>
+      <pubDate>Tue, 29 Dec 2015 20:22:53 +0900</pubDate>
+      
+      <guid>http://blog.import.re/post/data-class-equality/</guid>
+      <description>
+
+&lt;p&gt;애플리케이션을 만들다보면 모델에 해당하는 클래스를 만들게 될 것입니다.
+그러한 클래스들은 일반적으로 딱히 뭐 하는 것도 없고 데이터만 들고 있게되죠.&lt;/p&gt;
+
+&lt;p&gt;코톨린에서는 그러한 클래스를 특별히 정의할 수 있고, 그로인해 득되는 것들이 몇가지 있습니다.&lt;/p&gt;
+
+&lt;h2 id=&#34;데이터-클래스:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;데이터 클래스&lt;/h2&gt;
+
+&lt;h3 id=&#34;선언:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;선언&lt;/h3&gt;
+
+&lt;p&gt;데이터 클래스를 선언하는 방법은 &lt;code&gt;data&lt;/code&gt;를 &lt;code&gt;class&lt;/code&gt; 선언하기 전에 써주면 됩니다. 간단하죠?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;data class User(val name: String, val age: Int)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;제약사항:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;제약사항&lt;/h3&gt;
+
+&lt;p&gt;단, 몇가지 제약사항이 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;반드시 &lt;code&gt;primary constructor&lt;/code&gt;가 필요함
+
+&lt;ul&gt;
+&lt;li&gt;1개 이상의 파라미터가 반드시 존재해야 하고, 모든 파라미터는 &lt;code&gt;val&lt;/code&gt;/&lt;code&gt;var&lt;/code&gt;로 정의해야 함&lt;/li&gt;
+&lt;li&gt;참고로 &lt;a href=&#34;https://kotlinlang.org/docs/reference/classes.html#constructors&#34;&gt;primary constructor&lt;/a&gt;란 클래스 헤더에 존재하고, 클래스 이름 뒤에 정의하는 생성자를 의미함&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;abstract&lt;/code&gt;, &lt;code&gt;open&lt;/code&gt;, &lt;code&gt;sealed&lt;/code&gt; or &lt;code&gt;inner&lt;/code&gt; 클래스가 아니어야 함&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;interface&lt;/code&gt;를 확장하는 것 외에 다른 클래를 확장 불가&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;보다 자세한 조건과 이러한 제한이 생긴 이유는 &lt;a href=&#34;http://goo.gl/L0QVRb&#34;&gt;이 글&lt;/a&gt;을 참고하세요.&lt;/p&gt;
+
+&lt;h3 id=&#34;얻는-효과:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;얻는 효과&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;data&lt;/code&gt;를 선언함과 동시에 코틀린 컴파일러는 고맙게도 아래와 같은 일을 자동으로 해줍니다.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;equals()&lt;/code&gt;/&lt;code&gt;hashCode()&lt;/code&gt; 쌍으로 생성&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;toString()&lt;/code&gt; 생성 (&lt;code&gt;primary constructor&lt;/code&gt;에 선언된 프로퍼티들을 예쁘게 보여줌)&lt;/li&gt;
+&lt;li&gt;선언된 프로퍼티에 상응하는 &lt;code&gt;componentN()&lt;/code&gt; 함수들 생성
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kotlinlang.org/docs/reference/multi-declarations.html&#34;&gt;destructing&lt;/a&gt;할 때 사용할 수 있음&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;copy()&lt;/code&gt; 생성&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;글 제목이 &lt;code&gt;Data class and Equality&lt;/code&gt;인 이유는
+&lt;code&gt;equals&lt;/code&gt; 함수를 사용할 때 조심해야할 부분이 있기 때문입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;Equality&lt;/code&gt;로 넘어가봅시다.&lt;/p&gt;
+
+&lt;h2 id=&#34;equality:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;Equality&lt;/h2&gt;
+
+&lt;p&gt;코틀린에서는 동등 비교를 할 때 2가지 타입이 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;같은 레퍼런스인지 (동일한 객체를 가리키는지)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;==&lt;/code&gt; 연산자가 아닌 &lt;code&gt;===&lt;/code&gt; 연산자로 비교합니다.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;구조적으로 같은 형태인지
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;==&lt;/code&gt; 연산자가 &lt;code&gt;equals&lt;/code&gt;와 동일하게 동작합니다.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그럼 &lt;code&gt;data&lt;/code&gt; 클래스인 경우와 그렇지 않은 경우에 동등 비교의 결과를 여러가지 예제를 통해 살펴봅시다.&lt;br /&gt;
+참고로 아래 나오는 예제는 모두 테스트 케이스를 통과한 &lt;a href=&#34;https://goo.gl/suX3uZ&#34;&gt;코드&lt;/a&gt;입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;kotlin 1.0 beta 4 이후로는 test와 관련된 의존성을 따로 추가해야 사용이 가능합니다. &lt;a href=&#34;https://goo.gl/7I8dKf&#34;&gt;[참고]&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;user:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;User&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;name&lt;/code&gt;을 가지는 &lt;code&gt;User&lt;/code&gt;클래스를 &lt;strong&gt;&lt;code&gt;data&lt;/code&gt;인 것&lt;/strong&gt;과 &lt;strong&gt;그렇지 아니한 것&lt;/strong&gt;으로 테스트를 해보았습니다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;class User(val name: String)
+data class UserData(val name: String)
+
+@Test
+fun testUser() {
+    val u1 = User(&amp;quot;heo&amp;quot;)
+    val u2 = User(&amp;quot;heo&amp;quot;)
+    assertNotEquals(u1, u2)   // 데이터 클래스가 아닌 경우는 다름
+}
+
+@Test
+fun testUserData() {
+    val u1 = UserData(&amp;quot;heo&amp;quot;)
+    val u2 = UserData(&amp;quot;heo&amp;quot;)
+    assertEquals(u1, u2)      // 데이터 클래스인 경우는 같음
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;user-with-list:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;User with List&lt;/h3&gt;
+
+&lt;p&gt;그럼 &lt;code&gt;emails&lt;/code&gt;라는 &lt;code&gt;Collection&lt;/code&gt;(여기서는 &lt;code&gt;List&lt;/code&gt;)을 가진 &lt;code&gt;User&lt;/code&gt; 클래스라면 어떻게 될까요?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;class UserWithList(val name: String, val emails: List&amp;lt;String&amp;gt;)
+data class UserDataWithList(val name: String, val emails: List&amp;lt;String&amp;gt;)
+
+@Test
+fun testList() {
+    // list
+    assertEquals(listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;), 
+            listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;))
+    // nested list
+    assertEquals(listOf(listOf(&amp;quot;a@b.com&amp;quot;), listOf(&amp;quot;c@d.com&amp;quot;)),
+            listOf(listOf(&amp;quot;a@b.com&amp;quot;), listOf(&amp;quot;c@d.com&amp;quot;)))
+}
+
+@Test
+fun testUserWithList() {
+    val u1 = UserWithList(&amp;quot;heo&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;))
+    val u2 = UserWithList(&amp;quot;heo&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;))
+    assertNotEquals(u1, u2)
+}
+
+@Test
+fun testUserDataWithList() {
+    val u1 = UserDataWithList(&amp;quot;heo&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;))
+    val u2 = UserDataWithList(&amp;quot;heo&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;))
+    assertEquals(u1, u2)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;결과는 예상했던 바와 같이 &lt;code&gt;data&lt;/code&gt;로 선언하면 구조적으로 같은 경우에는 동등함을 알 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;리스트가 중첩된 경우도 구조만 같다면 동등하다는 것을 알 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;user-with-map:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;User with Map&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Map&lt;/code&gt;은 어떨까요?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;class UserWithMap(val name: String, val emails: Map&amp;lt;Int, String&amp;gt;)
+data class UserDataWithMap(val name: String, val emails: Map&amp;lt;Int, String&amp;gt;)
+
+@Test
+fun testUserWithMap() {
+    val u1 = UserWithMap(&amp;quot;heo&amp;quot;, mapOf(0 to &amp;quot;a@b.com&amp;quot;, 1 to &amp;quot;c@d.com&amp;quot;))
+    val u2 = UserWithMap(&amp;quot;heo&amp;quot;, mapOf(0 to &amp;quot;a@b.com&amp;quot;, 1 to &amp;quot;c@d.com&amp;quot;))
+    assertNotEquals(u1, u2)
+}
+
+@Test
+fun testUserDataWithMap() {
+    val u1 = UserDataWithMap(&amp;quot;heo&amp;quot;, mapOf(0 to &amp;quot;a@b.com&amp;quot;, 1 to &amp;quot;c@d.com&amp;quot;))
+    val u2 = UserDataWithMap(&amp;quot;heo&amp;quot;, mapOf(1 to &amp;quot;c@d.com&amp;quot;, 0 to &amp;quot;a@b.com&amp;quot;))
+    assertEquals(u1, u2)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Map&lt;/code&gt; 역시 마찬가지입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;List&lt;/code&gt;, &lt;code&gt;Map&lt;/code&gt; 등과 같은 &lt;code&gt;Collection&lt;/code&gt;들은 구조적으로 비교하기 때문에
+&lt;code&gt;data&lt;/code&gt; 클래스로 선언된 경우에는 동등하다고 알려줍니다.&lt;/p&gt;
+
+&lt;h3 id=&#34;user-with-array:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;User with Array&lt;/h3&gt;
+
+&lt;p&gt;그렇다면 &lt;code&gt;Array&lt;/code&gt;는 어떨까요?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;class UserWithArray(val name: String, val emails: Array&amp;lt;String&amp;gt;)
+data class UserDataWithArray(val name: String, val emails: Array&amp;lt;String&amp;gt;)
+
+@Test
+fun testUserWithArray() {
+    val a1= arrayOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;)
+    val a2= arrayOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;)
+    assertNotEquals(a1, a2)
+    
+    val u1 = UserWithArray(&amp;quot;heo&amp;quot;, a1)
+    val u2 = UserWithArray(&amp;quot;heo&amp;quot;, a2)
+    assertNotEquals(u1, u2)
+}
+
+@Test
+fun testUserDataWithArray() {
+    val u1 = UserDataWithArray(&amp;quot;heo&amp;quot;, arrayOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;))
+    val u2 = UserDataWithArray(&amp;quot;heo&amp;quot;, arrayOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;))
+    assertNotEquals(u1, u2) // data 클래스이지만 Not Equals
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Array&lt;/code&gt;는 &lt;code&gt;data&lt;/code&gt;로 선언해도 같다고 하질 않습니다!!!&lt;/p&gt;
+
+&lt;h4 id=&#34;코틀린에서-array-는-항상-레퍼런스를-비교합니다:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;코틀린에서 &lt;code&gt;Array&lt;/code&gt;는 항상 레퍼런스를 비교합니다.&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;콤포넌트로 선언된 배열은 구조적으로 비교하는데&lt;/li&gt;
+&lt;li&gt;중첩된 구조에서 하위 배열은 &lt;code&gt;equals&lt;/code&gt;로 비교하게되고,&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Any&lt;/code&gt;나 &lt;code&gt;T&lt;/code&gt;로 선언된 경우에는 런타임에 비교하기 때문에 모순되는 상황이 발생합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그래서 다 필요 없고 그냥 레퍼런스만 비교합니다.
+보다 자세한 사항은 &lt;a href=&#34;http://goo.gl/L0QVRb&#34;&gt;이 글&lt;/a&gt;의 아래쪽을 살펴보세요.&lt;/p&gt;
+
+&lt;h2 id=&#34;응용하기:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;응용하기&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/square/retrofit&#34;&gt;retrofit&lt;/a&gt;과 &lt;a href=&#34;https://github.com/ReactiveX/RxJava&#34;&gt;RxJava&lt;/a&gt;를 함께 사용할 때, retrofit의 응답으로 넘어오는 데이터의 정의를
+&lt;code&gt;data&lt;/code&gt;로 사용하면 좋습니다.&lt;/p&gt;
+
+&lt;p&gt;사실 굳이 &lt;code&gt;data&lt;/code&gt;로 선언하지 않아도 되긴 하지만,
+아래와 같은 시나리오에서는 아주 유용하게 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;시나리오는 아주 간단합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;retrofit으로 서버에 데이터를 요청하고, 응답으로 온 결과를 화면에 보여줘야 한다.&lt;br /&gt;
+이 때, 사용자가 화면을 새로고침을 실행했다.
+하지만 결과가 같아서 굳이 여러번 화면을 갱신할 필요가 없다면&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/ReactiveX/RxJava&#34;&gt;RxJava&lt;/a&gt;의 &lt;code&gt;Observable&lt;/code&gt;을 사용할 때 &lt;a href=&#34;http://reactivex.io/documentation/operators/replay.html&#34;&gt;replay(cache)&lt;/a&gt;와
+&lt;a href=&#34;http://reactivex.io/documentation/operators/distinct.html&#34;&gt;distinct 또는 distinctUntilChanged&lt;/a&gt;를 이용하면 훌륭하게 처리할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;아시다시피 &lt;code&gt;cache&lt;/code&gt;를 사용하게 되면
+이전에 요청했던 결과는 &lt;code&gt;subscribe&lt;/code&gt;하는 즉시 &lt;code&gt;onNext&lt;/code&gt;로 넘어오게 되는데,
+새로고침을 하더라도 &lt;code&gt;distinct&lt;/code&gt;에 의해 &lt;code&gt;onNext&lt;/code&gt;가 두 번 호출되는 것을 막을 수 있습니다.&lt;br /&gt;
+따라서, 화면 갱신하는 부분을 자연스럽게 한 번만 호출 할 수 있게 됩니다.&lt;br /&gt;
+아주 좋지요?&lt;/p&gt;
+
+&lt;h3 id=&#34;test-with-rx:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;Test with Rx&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;cache&lt;/code&gt;는 이 글에서 논 외로 치고, &lt;code&gt;equals&lt;/code&gt;에 초첨을 맞춘 예제입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;distinctUntilChanged&lt;/code&gt; 오퍼레이터에 의해
+이전에 방출된 데이터가 다를 때에만 &lt;code&gt;onNext&lt;/code&gt;가 호출되는 것을 확인하실 수 있습니다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;@Test
+fun testWithRx() {
+    val users = arrayOf(
+            UserDataWithList(&amp;quot;heo&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;)),
+            UserDataWithList(&amp;quot;heo&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;)),
+            UserDataWithList(&amp;quot;kim&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;)),
+            UserDataWithList(&amp;quot;heo&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;)),
+            UserDataWithList(&amp;quot;heo&amp;quot;, listOf(&amp;quot;a@b.com&amp;quot;, &amp;quot;c@d.com&amp;quot;))
+    )
+
+    val count = CountDownLatch(users.size)
+    Observable.from(users)
+            .distinctUntilChanged()
+            .observeOn(Schedulers.newThread())
+            .subscribe {
+                count.countDown()
+                println(it)
+            }
+
+    count.await(1, TimeUnit.SECONDS)
+    assertEquals(2, count.count) // 2개가 남아야 함
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;위의 결과는 아래와 같습니다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;UserDataWithList(name=heo, emails=[a@b.com, c@d.com])
+UserDataWithList(name=kim, emails=[a@b.com, c@d.com])
+UserDataWithList(name=heo, emails=[a@b.com, c@d.com])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;정리:6d2a11c56fb0c917b8b8fcfbc8e39cac&#34;&gt;정리&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;data&lt;/code&gt;클래스와 &lt;code&gt;equality&lt;/code&gt;에 대해 살펴보았습니다.&lt;br /&gt;
+일단은 &lt;code&gt;data&lt;/code&gt;클래스에서 &lt;code&gt;Array&lt;/code&gt;를 사용하면
+&lt;strong&gt;동등비교가 되지 않음&lt;/strong&gt;에 유의하면 될 것 같습니다(스펙이 바뀌는지도 잘 살펴봐야 할 듯 하네요).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/ReactiveX/RxJava&#34;&gt;RxJava&lt;/a&gt;의 오퍼레이터 중에서 &lt;code&gt;equals&lt;/code&gt;를 사용하는 경우,
+&lt;code&gt;data&lt;/code&gt;클래스와 함께 아주 유용하게 사용할 수 있습니다.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Function Literals with Receiver</title>
