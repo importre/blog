@@ -13,7 +13,11 @@
         <main>
           <div class="contents">
             {{ partial "post-info.html" . }}
+            {{ if .Description }}
+            {{ .Description }}
+            {{ else }}
             {{ .Summary }}
+            {{ end }}
           </div>
         </main>
         <div>
