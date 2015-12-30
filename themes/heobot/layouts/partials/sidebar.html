@@ -8,13 +8,11 @@
         <div class="panel-heading">
           <h3 class="panel-title">Categories</h3>
         </div>
-        <ul class="list-group">
+        <div class="panel-body">
           {{ range $name, $taxonomy := $categories }}
-          <a href="/categories/{{ $name | urlize }}" class="list-group-item">
-            {{ $name }}
-          </a>
+          <span class="label label-success tag"><a href="/categories/{{ $name | urlize }}" style="color: white;">{{ $name }}</a></span>
           {{ end }}
-        </ul>
+        </div>
       </div>
       {{ end }}
     </div>
